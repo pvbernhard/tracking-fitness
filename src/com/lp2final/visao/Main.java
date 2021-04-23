@@ -15,9 +15,8 @@ public class Main {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
         int resposta;
-        // criar perfil
-        // Perfil perfil = new Perfil ..
 
+        PerfilControle p = new PerfilControle();
 
         //Se o arquivo existe entao vai direto para o menu se arquivo nao existe criar um novo perfil
         PerfilControle a = new PerfilControle();
@@ -39,8 +38,8 @@ public class Main {
             scanner.nextLine();
             System.out.println("Perfil Criado.");
 
-            Perfil p = new Perfil(nome, idade, altura, peso);
-            p.criarArq();
+            Perfil criar = new Perfil(nome, idade, altura, peso);
+            criar.criarArq();
         }
 
         ArrayList<String> dados = a.acessaPerfil();
@@ -111,9 +110,9 @@ public class Main {
                     System.out.println("Finalizando.");
                     break;
                 case 1:
-                    System.out.println("{Apresentar Perfil}");
+                    System.out.println("{Perfil}");
 
-
+                    p.perfilMenu(perfil);
 
                     break;
                 case 2:

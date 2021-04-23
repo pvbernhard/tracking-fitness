@@ -1,7 +1,10 @@
 package com.lp2final.controle;
 
+import com.lp2final.modelo.Perfil;
+
 import java.io.*;
 import java.util.ArrayList;
+import java.util.Scanner;
 
 public class PerfilControle {
 
@@ -104,6 +107,74 @@ public class PerfilControle {
                     System.out.println("IO Erro: " + e.getMessage());
                 }
             }
+        }
+
+    }
+
+    public void perfilMenu(Perfil perfil){
+
+        Scanner scan = new Scanner(System.in);
+        PerfilControle a = new PerfilControle();
+        int escSub;
+
+        while (true){
+            perfil.mostraPerfil();
+
+            System.out.println("1 - Editar Perfil" +
+                    "\n0 - Sair");
+            escSub = scan.nextInt();
+
+            if(escSub == 0){
+                break;
+            }
+
+            if(escSub == 1){
+
+                while (true) {
+
+                    String sub = "";
+                    int alterar;
+
+                    System.out.println("1 - Alterar o nome" +
+                            "\n2 - Alterar Idade" +
+                            "\n3 - Alterar Alturar" +
+                            "\n4 - Alterar Peso" +
+                            "\n0 - Sair");
+                    alterar = scan.nextInt();
+                    scan.nextLine();
+                    if(alterar == 0){
+                        break;
+                    }
+
+                    if (alterar == 1) {
+                        System.out.println("Digite um novo nome");
+                        sub = scan.nextLine();
+                        a.editarPerfil("Nome", sub);
+                        perfil.setNome(sub);
+                    }
+                    if (alterar == 2) {
+                        System.out.println("Digite Sua nova idade");
+                        sub = scan.nextLine();
+                        a.editarPerfil("Idade", sub);
+                        perfil.setIdade( Integer.valueOf(sub).intValue());
+                    }
+                    if (alterar == 3) {
+                        System.out.println("Digite Sua nova altura");
+                        sub = scan.nextLine();
+                        sub = sub.replace(",",".");
+                        a.editarPerfil("Altura", sub);
+                        perfil.setAltura( Double.valueOf(sub).doubleValue());
+                    }
+                    if (alterar == 4) {
+                        System.out.println("Digite Seu novo peso");
+                        sub = scan.nextLine();
+                        sub = sub.replace(",",".");
+                        a.editarPerfil("Peso", sub);
+                        perfil.setPeso(Double.valueOf(sub).doubleValue());
+                    }
+                }
+            }
+
         }
 
     }
