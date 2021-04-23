@@ -9,7 +9,6 @@ public class AtividadeFisica implements Serializable {
     private static final long serialVersionUID = 1L;
 
     private String nome;
-    private Integer segundos;
     private Double taxaCalorias;
 
     public AtividadeFisica(String nome, Double taxaCalorias) {
@@ -21,14 +20,6 @@ public class AtividadeFisica implements Serializable {
         return nome;
     }
 
-    public Integer getSegundos() {
-        return segundos;
-    }
-
-    public void setSegundos(Integer segundos) {
-        this.segundos = segundos;
-    }
-
     public Double getTaxaCalorias() {
         return taxaCalorias;
     }
@@ -37,7 +28,6 @@ public class AtividadeFisica implements Serializable {
     public String toString() {
         return "AtividadeFisica{" +
                 "nome='" + nome + '\'' +
-                ", segundos=" + segundos +
                 ", taxaCalorias=" + taxaCalorias +
                 '}';
     }
