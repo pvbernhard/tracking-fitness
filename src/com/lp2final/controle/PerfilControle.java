@@ -3,7 +3,7 @@ package com.lp2final.controle;
 import java.io.*;
 import java.util.ArrayList;
 
-public class PerfilSalvar {
+public class PerfilControle {
 
     public ArrayList<String> acessaPerfil() {
         BufferedReader conteudo = null;
@@ -12,7 +12,7 @@ public class PerfilSalvar {
 
         try {
 
-            conteudo = new BufferedReader(new FileReader("Perfil.txt"));
+            conteudo = new BufferedReader(new FileReader("Perfil.dat"));
 
             while ((linha = conteudo.readLine()) != null) {
 
@@ -47,7 +47,7 @@ public class PerfilSalvar {
 
         BufferedReader conteudo = null;
         String linha = "";
-        String caminho = "Perfil.txt";
+        String caminho = "Perfil.dat";
 
         try (FileWriter criar = new FileWriter(caminho, true);
              BufferedWriter buffer = new BufferedWriter(criar);
