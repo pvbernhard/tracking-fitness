@@ -27,7 +27,7 @@ public class Perfil {
         BufferedReader conteudo = null;
         String escreverNoArq = "";
 
-        try (FileWriter criar = new FileWriter("Perfil.txt", false);
+        try (FileWriter criar = new FileWriter("Perfil.dat", false);
              BufferedWriter buffer = new BufferedWriter(criar);
              PrintWriter escrever = new PrintWriter(buffer);) {
             escreverNoArq = "Nome;" + this.nome +"\n"+
