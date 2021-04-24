@@ -264,7 +264,7 @@ public class PerfilControle {
 
     }
 
-    private boolean dataRepetida(){
+    private boolean dataRepetida(String dataAtual){
 
         BufferedReader conteudo = null;
         String linha = "";
@@ -284,10 +284,8 @@ public class PerfilControle {
 
             for (int i = 0;i<perfil.size();i++){
 
-                for(int j = 0; i<perfil.size();i++){
-                    if(perfil.get(i) == perfil.get(j)){
-                        return true;
-                    }
+                if(perfil.get(i).equals(dataAtual)){
+                    return  true;
                 }
 
             }
@@ -313,7 +311,7 @@ public class PerfilControle {
         return false;
     }
 
-    private boolean editaPeso(String novo){
+    private boolean editaPeso(String novo, String dataAtual){
         BufferedReader conteudo = null;
         String linha = "";
         String totalL ="";
@@ -328,7 +326,7 @@ public class PerfilControle {
             conteudo = new BufferedReader(new FileReader(caminhoPeso.toFile()));
             conteudo.mark(1000);
             ArrayList<String> salvar = new ArrayList<>();
-            ArrayList<String> rep = new ArrayList<>();
+
 
             while ((totalL = conteudo.readLine()) != null) {
                 qlinhas++;
@@ -338,25 +336,16 @@ public class PerfilControle {
                 // salva tudo dentro de um arrayList+
                 String[] dados = linha.split(";");
 
-                if(qlinhas == 1){
+
+                if(qlinhas == 1 ){
                     dados[1] = novo;
                     String linhaAlterada = dados[0]+";"+dados[1];
                     salvar.add(linhaAlterada);
                     continue;
                 }
 
-                if(uma){
-                    rep.add(dados[0]);
-                    uma = false;
-                    String linhaAlterada = dados[0]+";"+dados[1];
-                    salvar.add(linhaAlterada);
-                    continue;
-                }
-
-                for(int i = 0;i<rep.size();i++){
-                    if(dados[0].equals(rep.get(i))){
-                        dados[1] = novo;
-                    }
+                if(dados[0].equals(dataAtual)){
+                    dados[1] = novo;
                 }
 
                 String linhaAlterada = dados[0]+";"+dados[1];
@@ -416,18 +405,18 @@ public class PerfilControle {
              BufferedWriter buffer = new BufferedWriter(criar);
              PrintWriter escrever = new PrintWriter(buffer);) {
 
+            String dia = d.get(5)+"";
+            String mes = d.get(2)+1 +"";
+            String ano = d.get(1)+"";
+
+            String dataAtual = dia+":"+mes+":"+ano;
+
             if(perfilPesoExist()){
-                if(dataRepetida()){
-                    editaPeso(peso);
+                if(dataRepetida(dataAtual)){
+                    editaPeso(peso,dataAtual);
                 }else {
 
-                    String dia = d.get(5)+"";
-                    String mes = d.get(2)+1 +"";
-                    String ano = d.get(1)+"";
-
-                    String dataAgora = dia+":"+mes+":"+ano;
-
-                    escreverNoArq = dataAgora +";"+peso+"\n";
+                    escreverNoArq = dataAtual +";"+peso+"\n";
                     escrever.append(escreverNoArq);
 
                 }
