@@ -15,10 +15,8 @@ public class Perfil {
     private int idade;
     private double altura;
     private double peso;
-
-    public Perfil(){
-
-    }
+    private String metaTemp = "0.0";
+    private String metaCal = "0.0";
 
 
     public Perfil(String nome, int idade, double altura, double peso) {
@@ -34,10 +32,21 @@ public class Perfil {
 
     }
 
+    public Perfil(String nome, int idade, double altura, double peso, String metaTemp, String metaCal) {
+        this.nome = nome;
+        this.idade = idade;
+        this.altura = altura;
+        this.peso = peso;
+        this.metaTemp = metaTemp;
+        this.metaCal = metaCal;
+    }
+
+
     public void criarArq(){
 
         BufferedReader conteudo = null;
         String escreverNoArq = "";
+
 
         try (FileWriter criar = new FileWriter(caminho.toFile(), false);
              BufferedWriter buffer = new BufferedWriter(criar);
@@ -46,7 +55,9 @@ public class Perfil {
                     "Idade;" + this.idade +"\n"+
                     "Altura;"+ this.altura+"\n"+
                     "Peso;"+ this.peso+"\n"+
-                    "imc;"+this.imc();
+                    "imc;"+this.imc()+"\n" +
+                    "MetaCal;"+this.metaCal+"\n" +
+                    "MetaTemp;"+this.metaTemp+"\n";
             escrever.append(escreverNoArq);
 
         } catch (FileNotFoundException e) {
@@ -72,7 +83,7 @@ public class Perfil {
         return imc;
     }
 
-    public String imcClassificacao(){
+    private String imcClassificacao(){
         if(imc() < 16){
             return "Subpeso Severo";
         }else if(imc() > 16 && imc() < 19.9){
@@ -89,15 +100,19 @@ public class Perfil {
     }
 
     public void mostraPerfil(){
+        String metaT,metaC;
+        metaC = getMetaCal();
+        metaT = getMetaTemp();
 
         System.out.println("Nome = "+ this.nome +
                 "\nAltura = "+ this.altura+
                 "\nPeso = "+this.peso+
                 "\nIdade = "+this.idade+
-                "\nVoce esta com "+ imcClassificacao());
+                "\nVoce esta com " + imcClassificacao()+
+                "\nSua meta diaria é Caloria:" +metaC+
+                "\nSua meta diaria de tempo é:"+ metaT);
 
     }
-
 
 
 
@@ -133,4 +148,19 @@ public class Perfil {
         this.peso = peso;
     }
 
+    public String getMetaTemp() {
+        return metaTemp;
+    }
+
+    public void setMetaTemp(String metaTemp) {
+        this.metaTemp = metaTemp;
+    }
+
+    public String getMetaCal() {
+        return metaCal;
+    }
+
+    public void setMetaCal(String metaCal) {
+        this.metaCal = metaCal;
+    }
 }

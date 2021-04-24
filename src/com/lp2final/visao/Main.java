@@ -43,9 +43,9 @@ public class Main {
         }
         // pega dados do perfil ja existente
         ArrayList<String> dados = p.acessaPerfil();
-        String[] dadosParaConversao =  new String[4];
+        String[] dadosParaConversao =  new String[dados.size()];
         int i =0;
-        while (i < 4){
+        while (i < dados.size()){
             dadosParaConversao[i] = dados.get(i);
             i++;
         }
@@ -53,8 +53,10 @@ public class Main {
         idade = Integer.valueOf(dadosParaConversao[1]).intValue();
         altura =  Double.valueOf(dadosParaConversao[2]).doubleValue();
         peso = Double.valueOf(dadosParaConversao[3]).doubleValue();
+        String cal = dadosParaConversao[5];
+        String temp = dadosParaConversao[6];
 
-        Perfil perfil = new Perfil(nome,idade,altura,peso);
+        Perfil perfil = new Perfil(nome,idade,altura,peso,temp,cal);
 
 
         AtividadeFisica p1 = new AtividadeFisica("Corrida", 1.2);

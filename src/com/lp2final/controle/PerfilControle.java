@@ -6,6 +6,7 @@ import java.io.*;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.sql.SQLOutput;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -24,7 +25,6 @@ public class PerfilControle {
         }
 
     }
-
 
     public ArrayList<String> acessaPerfil() {
         BufferedReader conteudo = null;
@@ -64,7 +64,7 @@ public class PerfilControle {
 
     }
 
-    public void editarPerfil(String tipo, String novo){
+    private boolean editarPerfil(String tipo, String novo){
 
         BufferedReader conteudo = null;
         String linha = "";
@@ -110,7 +110,7 @@ public class PerfilControle {
 
             newBuffer.close();
             cNovo.close();
-
+            return true;
         } catch (FileNotFoundException e) {
             System.out.println("Arquivo nao encontrado:" + e.getMessage());
         } catch (ArrayIndexOutOfBoundsException e) {
@@ -127,6 +127,7 @@ public class PerfilControle {
             }
         }
 
+        return false;
     }
 
     public void perfilMenu(Perfil perfil){
@@ -136,9 +137,12 @@ public class PerfilControle {
         int escSub;
 
         while (true){
+            System.out.println("**** Perfil ****");
+
             perfil.mostraPerfil();
 
             System.out.println("1 - Editar Perfil" +
+                    "\n2 - Definir metas (Calorias/tempo) " +
                     "\n0 - Sair");
             escSub = scan.nextInt();
 
@@ -149,7 +153,7 @@ public class PerfilControle {
             if(escSub == 1){
 
                 while (true) {
-
+                    System.out.println("**** Edita ****");
                     String sub = "";
                     int alterar;
 
@@ -191,6 +195,53 @@ public class PerfilControle {
                         perfil.setPeso(Double.valueOf(sub).doubleValue());
                     }
                 }
+            }
+
+
+            if(escSub == 2){
+
+                while(true){
+                    System.out.println("**** Metas ****");
+                    System.out.println("1 - Definir metas de por dia Calorias" +
+                            "\n2 - Definir metas de tempo de exercicios por dia" +
+                            "\n0 - Sair");
+                    int d;
+                    String meta;
+                    d = scan.nextInt();
+                    scan.nextLine();
+
+                    if(d == 0){
+                        break;
+                    }
+
+                    if(d == 1){
+                        System.out.println("Qual é a meta de calorias diarias?");
+                        meta = scan.nextLine();
+                        if(a.editarPerfil("MetaCal",meta)){
+                            perfil.setMetaCal(meta);
+                            System.out.println("Meta cadastrada com sucesso");
+                        }else{
+                            System.out.println("Ocorreu um erro");
+                        }
+
+                    }
+
+                    if(d == 2){
+                        System.out.println("Qual é de tempo de ativiades Diaria?");
+                        meta = scan.nextLine();
+                        if(a.editarPerfil("MetaTemp",meta)){
+                            perfil.setMetaTemp(meta);
+                            System.out.println("Meta cadastrada com sucesso");
+                        }else{
+                            System.out.println("Ocorreu um erro");
+                        }
+
+
+                    }
+
+                }
+
+
             }
 
         }
