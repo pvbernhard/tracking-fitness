@@ -16,11 +16,16 @@ import java.util.Scanner;
 public class PerfilControle {
 
     private final String PASTA = "config";
-    private final String nome = "Perfil.dat";
-    private final String nomePeso = "PerfilPeso.dat";
+    private String nome;
+    private String nomePeso;
 
     private Path caminho = Paths.get(this.PASTA, this.nome);
     private Path caminhoPeso = Paths.get(this.PASTA,this.nomePeso);
+
+    public PerfilControle(String nome) {
+        this.nome = nome + ".dat";
+        this.nomePeso = nome + "Peso.dat";
+    }
 
     public boolean perfilExist(){
         if(Files.exists( caminho )){
@@ -147,7 +152,7 @@ public class PerfilControle {
     public void perfilMenu(Perfil perfil){
 
         Scanner scan = new Scanner(System.in);
-        PerfilControle a = new PerfilControle();
+        PerfilControle a = new PerfilControle("Perfil");
         int escSub;
 
         while (true){

@@ -17,7 +17,7 @@ public class Main {
         Scanner scanner = new Scanner(System.in);
         int resposta;
 
-        PerfilControle p = new PerfilControle();
+        PerfilControle p = new PerfilControle("Perfil");
 
         //Se o arquivo existe entao vai direto para o menu se arquivo nao existe criar um novo perfil
         String nome;
