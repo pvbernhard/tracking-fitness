@@ -104,4 +104,26 @@ public class AtividadesControle {
         return atividades;
     }
 
+    public ArrayList<AtividadeFeita> lerAtividadesFeitas() throws IOException, ClassNotFoundException {
+        FileInputStream inputArquivo = new FileInputStream(this.getCaminho().toFile());
+        ObjectInputStream inputObjeto = new ObjectInputStream(inputArquivo);
+
+        AtividadeFeita atividadeTemp;
+        ArrayList<AtividadeFeita> atividades = new ArrayList<>();
+
+        while (true) {
+            try {
+                atividadeTemp = (AtividadeFeita) inputObjeto.readObject();
+                atividades.add(atividadeTemp);
+            } catch (EOFException e) {
+                break;
+            }
+        }
+
+        inputObjeto.close();
+        inputArquivo.close();
+
+        return atividades;
+    }
+
 }
