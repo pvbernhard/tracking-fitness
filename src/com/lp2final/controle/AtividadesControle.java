@@ -1,5 +1,6 @@
 package com.lp2final.controle;
 
+import com.lp2final.modelo.AtividadeFeita;
 import com.lp2final.modelo.AtividadeFisica;
 
 import java.io.*;
@@ -22,18 +23,21 @@ public class AtividadesControle {
     public String getNomeArquivo() {
         return nomeArquivo;
     }
+    
+    public Path getCaminho() {
+        return Paths.get(this.PASTA, this.nomeArquivo);
+    }
 
     public void setNomeArquivo(String nomeArquivo) {
         this.nomeArquivo = nomeArquivo;
     }
 
-    public void escreverAtividadeBD(AtividadeFisica atividadeFisica) throws IOException {
-        this.escreverAtividadeBD(atividadeFisica, true);
+    public void escreverAtividade(AtividadeFisica atividadeFisica) throws IOException {
+        this.escreverAtividade(atividadeFisica, true);
     }
 
-    public void escreverAtividadeBD(AtividadeFisica atividadeFisica, Boolean acrescentar) throws IOException {
-        Path caminho = Paths.get(this.PASTA, this.nomeArquivo);
-        FileOutputStream outputArquivo = new FileOutputStream(caminho.toFile(), acrescentar);
+    public void escreverAtividade(AtividadeFisica atividadeFisica, Boolean acrescentar) throws IOException {
+        FileOutputStream outputArquivo = new FileOutputStream(this.getCaminho().toFile(), acrescentar);
         ObjectOutputStream outputObjeto = new ObjectOutputStream(outputArquivo);
 
         outputObjeto.writeObject(atividadeFisica);
@@ -41,4 +45,19 @@ public class AtividadesControle {
         outputObjeto.close();
         outputArquivo.close();
     }
+
+    public void escreverAtividadeFeita(AtividadeFeita atividadeFeita) throws IOException {
+        this.escreverAtividadeFeita(atividadeFeita, true);
+    }
+
+    public void escreverAtividadeFeita(AtividadeFeita atividadeFeita, Boolean acrescentar) throws IOException {
+        FileOutputStream outputArquivo = new FileOutputStream(this.getCaminho().toFile(), acrescentar);
+        ObjectOutputStream outputObjeto = new ObjectOutputStream(outputArquivo);
+
+        outputObjeto.writeObject(atividadeFeita);
+
+        outputObjeto.close();
+        outputArquivo.close();
+    }
+
 }
