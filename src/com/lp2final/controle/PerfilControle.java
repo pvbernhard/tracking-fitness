@@ -249,5 +249,40 @@ public class PerfilControle {
     }
 
 
+    public void criarArq(){
+
+        BufferedReader conteudo = null;
+        String escreverNoArq = "";
+        Perfil p = new Perfil();
+
+        try (FileWriter criar = new FileWriter(caminho.toFile(), false);
+             BufferedWriter buffer = new BufferedWriter(criar);
+             PrintWriter escrever = new PrintWriter(buffer);) {
+            escreverNoArq = "Nome;" + p.getNome() +"\n"+
+                    "Idade;" + p.getIdade() +"\n"+
+                    "Altura;"+ p.getAltura()+"\n"+
+                    "Peso;"+ p.getPeso()+"\n"+
+                    "imc;"+p.imc()+"\n" +
+                    "MetaCal;"+p.getMetaCal()+"\n" +
+                    "MetaTemp;"+p.getMetaTemp()+"\n";
+            escrever.append(escreverNoArq);
+
+        } catch (FileNotFoundException e) {
+            System.out.println("Arquivo nao encontrado:" + e.getMessage());
+        } catch (ArrayIndexOutOfBoundsException e) {
+            System.out.println("IndexOutBouds: " + e.getMessage());
+        } catch (IOException e) {
+            System.out.println("IO Erro: " + e.getMessage());
+        } finally {
+            if (conteudo != null) {
+                try {
+                    conteudo.close();
+                } catch (IOException e) {
+                    System.out.println("IO Erro: " + e.getMessage());
+                }
+            }
+        }
+
+    }
 
 }

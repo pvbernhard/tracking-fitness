@@ -39,7 +39,7 @@ public class Main {
             System.out.println("Perfil Criado.");
 
             Perfil criar = new Perfil(nome, idade, altura, peso);
-            criar.criarArq();
+            p.criarArq();
         }
         // pega dados do perfil ja existente
         ArrayList<String> dados = p.acessaPerfil();

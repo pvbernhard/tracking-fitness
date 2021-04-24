@@ -6,10 +6,6 @@ import java.nio.file.Paths;
 
 public class Perfil {
 
-    private final String PASTA = "config";
-    private final String nomeArq = "Perfil.dat";
-
-    Path caminho = Paths.get(this.PASTA, this.nomeArq);
 
     private String nome;
     private int idade;
@@ -25,7 +21,7 @@ public class Perfil {
         this.altura = altura;
         this.peso = peso;
 
-        File pasta = new File(this.PASTA);
+        File pasta = new File("config");
         if (!pasta.exists()) {
             pasta.mkdir();
         }
@@ -41,44 +37,11 @@ public class Perfil {
         this.metaCal = metaCal;
     }
 
-
-    public void criarArq(){
-
-        BufferedReader conteudo = null;
-        String escreverNoArq = "";
-
-
-        try (FileWriter criar = new FileWriter(caminho.toFile(), false);
-             BufferedWriter buffer = new BufferedWriter(criar);
-             PrintWriter escrever = new PrintWriter(buffer);) {
-            escreverNoArq = "Nome;" + this.nome +"\n"+
-                    "Idade;" + this.idade +"\n"+
-                    "Altura;"+ this.altura+"\n"+
-                    "Peso;"+ this.peso+"\n"+
-                    "imc;"+this.imc()+"\n" +
-                    "MetaCal;"+this.metaCal+"\n" +
-                    "MetaTemp;"+this.metaTemp+"\n";
-            escrever.append(escreverNoArq);
-
-        } catch (FileNotFoundException e) {
-            System.out.println("Arquivo nao encontrado:" + e.getMessage());
-        } catch (ArrayIndexOutOfBoundsException e) {
-            System.out.println("IndexOutBouds: " + e.getMessage());
-        } catch (IOException e) {
-            System.out.println("IO Erro: " + e.getMessage());
-        } finally {
-            if (conteudo != null) {
-                try {
-                    conteudo.close();
-                } catch (IOException e) {
-                    System.out.println("IO Erro: " + e.getMessage());
-                }
-            }
-        }
+    public Perfil(){
 
     }
 
-    private double imc(){
+    public double imc(){
         double imc = this.peso/(this.altura*this.altura);
         return imc;
     }
