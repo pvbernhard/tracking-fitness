@@ -17,7 +17,7 @@ public class AtividadesBD {
         ArrayList<AtividadeFisica> bd = this.BD();
 
         for(AtividadeFisica atividadeFisica : bd) {
-            atividadesControle.escreverAtividade(atividadeFisica);
+            atividadesControle.escreverAtividade(atividadeFisica, false);
         }
     }
 
