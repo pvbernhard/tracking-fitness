@@ -1,9 +1,15 @@
 package com.lp2final.modelo;
 
 import java.io.*;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 
 public class Perfil {
 
+    private final String PASTA = "config";
+    private final String nomeArq = "Perfil.dat";
+
+    Path caminho = Paths.get(this.PASTA, this.nomeArq);
 
     private String nome;
     private int idade;
@@ -20,6 +26,12 @@ public class Perfil {
         this.idade = idade;
         this.altura = altura;
         this.peso = peso;
+
+        File pasta = new File(this.PASTA);
+        if (!pasta.exists()) {
+            pasta.mkdir();
+        }
+
     }
 
     public void criarArq(){
@@ -27,7 +39,7 @@ public class Perfil {
         BufferedReader conteudo = null;
         String escreverNoArq = "";
 
-        try (FileWriter criar = new FileWriter("Perfil.dat", false);
+        try (FileWriter criar = new FileWriter(caminho.toFile(), false);
              BufferedWriter buffer = new BufferedWriter(criar);
              PrintWriter escrever = new PrintWriter(buffer);) {
             escreverNoArq = "Nome;" + this.nome +"\n"+
