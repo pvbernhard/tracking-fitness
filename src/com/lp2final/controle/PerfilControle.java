@@ -3,19 +3,37 @@ package com.lp2final.controle;
 import com.lp2final.modelo.Perfil;
 
 import java.io.*;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Scanner;
 
 public class PerfilControle {
 
+    private final String PASTA = "config";
+    private final String nome = "Perfil.dat";
+
+    Path caminho = Paths.get(this.PASTA, this.nome);
+
+    public boolean perfilExist(){
+        if(Files.exists( caminho )){
+            return true;
+        }else{
+            return false;
+        }
+
+    }
+
+
     public ArrayList<String> acessaPerfil() {
         BufferedReader conteudo = null;
         String linha = "";
-        ArrayList<String> perfil =  new ArrayList<>();
+        ArrayList<String> perfil = new ArrayList<>();
 
         try {
 
-            conteudo = new BufferedReader(new FileReader("Perfil.dat"));
+            conteudo = new BufferedReader(new FileReader(caminho.toFile()));
 
             while ((linha = conteudo.readLine()) != null) {
 
@@ -50,13 +68,13 @@ public class PerfilControle {
 
         BufferedReader conteudo = null;
         String linha = "";
-        String caminho = "Perfil.dat";
 
-        try (FileWriter criar = new FileWriter(caminho, true);
+
+        try (FileWriter criar = new FileWriter(caminho.toFile(), true);
              BufferedWriter buffer = new BufferedWriter(criar);
              PrintWriter escrever = new PrintWriter(buffer);) {
 
-            conteudo = new BufferedReader(new FileReader(caminho));
+            conteudo = new BufferedReader(new FileReader(caminho.toFile()));
             ArrayList<String> salvar = new ArrayList<>();
 
             while ((linha = conteudo.readLine()) != null) {
@@ -76,11 +94,11 @@ public class PerfilControle {
             escrever.close();
 
             // apaga tudo q tinha no arquivo
-            FileWriter apg = new FileWriter(caminho, true);
+            FileWriter apg = new FileWriter(caminho.toFile(), true);
             apg.close();
 
             // escrever tudo no novo arquivo
-            FileWriter cNovo = new FileWriter(caminho);
+            FileWriter cNovo = new FileWriter(caminho.toFile());
             BufferedWriter newBuffer = new BufferedWriter(cNovo);
 
             for (int i = 0; i < salvar.size(); i++) {

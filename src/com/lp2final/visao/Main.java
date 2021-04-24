@@ -7,6 +7,7 @@ import com.lp2final.modelo.Perfil;
 import java.io.*;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -19,12 +20,11 @@ public class Main {
         PerfilControle p = new PerfilControle();
 
         //Se o arquivo existe entao vai direto para o menu se arquivo nao existe criar um novo perfil
-        PerfilControle a = new PerfilControle();
         String nome;
         int idade;
         double peso,altura;
 
-        if(!Files.exists(Path.of("Perfil.dat"))) {
+        if(!p.perfilExist()) {
             System.out.println("Qual seu nome? ");
             nome = scanner.nextLine();
             System.out.println("Qual Sua idade? ");
@@ -41,8 +41,8 @@ public class Main {
             Perfil criar = new Perfil(nome, idade, altura, peso);
             criar.criarArq();
         }
-
-        ArrayList<String> dados = a.acessaPerfil();
+        // pega dados do perfil ja existente
+        ArrayList<String> dados = p.acessaPerfil();
         String[] dadosParaConversao =  new String[4];
         int i =0;
         while (i < 4){
