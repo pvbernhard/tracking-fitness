@@ -13,12 +13,14 @@ public class AtividadeFeita implements Serializable {
     private AtividadeFisica atividadeFisica;
     private String descricao;
     private Integer duracao;
+    private Double caloriasPerdidas;
 
-    public AtividadeFeita(Date data, AtividadeFisica atividadeFisica, String descricao, Integer duracao) {
+    public AtividadeFeita(Perfil perfil, Date data, AtividadeFisica atividadeFisica, String descricao, Integer duracao) {
         this.data = data;
         this.atividadeFisica = atividadeFisica;
         this.descricao = descricao;
         this.duracao = duracao;
+        this.caloriasPerdidas = this.atividadeFisica.getTaxaCalorias() * perfil.getPeso() * duracao;
     }
 
     public AtividadeFisica getAtividadeFisica() {
@@ -33,11 +35,18 @@ public class AtividadeFeita implements Serializable {
         return descricao;
     }
 
+    public Double getCaloriasPerdidas() {
+        return caloriasPerdidas;
+    }
+
     @Override
     public String toString() {
         return "AtividadeFeita{" +
-                "atividadeFisica=" + atividadeFisica +
+                "data=" + data +
+                ", atividadeFisica=" + atividadeFisica.getNome() +
+                ", descricao='" + descricao + '\'' +
                 ", duracao=" + duracao +
+                ", caloriasPerdidas=" + caloriasPerdidas +
                 '}';
     }
 }
