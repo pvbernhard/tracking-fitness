@@ -1,11 +1,20 @@
 package com.lp2final.modelo;
 
-public class AtividadeFeita {
+import java.io.Serial;
+import java.io.Serializable;
+
+public class AtividadeFeita implements Serializable {
+
+    @Serial
+    private static final long serialVersionUID = 1L;
+
     private AtividadeFisica atividadeFisica;
+    private String descricao;
     private Integer duracao;
 
-    public AtividadeFeita(AtividadeFisica atividadeFisica, Integer duracao) {
+    public AtividadeFeita(AtividadeFisica atividadeFisica, String descricao, Integer duracao) {
         this.atividadeFisica = atividadeFisica;
+        this.descricao = descricao;
         this.duracao = duracao;
     }
 
@@ -15,6 +24,10 @@ public class AtividadeFeita {
 
     public Integer getDuracao() {
         return duracao;
+    }
+
+    public String getDescricao() {
+        return descricao;
     }
 
     @Override
