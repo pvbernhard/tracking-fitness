@@ -343,9 +343,9 @@ public class PerfilControle {
              BufferedWriter buffer = new BufferedWriter(criar);
              PrintWriter escrever = new PrintWriter(buffer);) {
 
-            String dia = d.get(5)+"";
-            String mes = d.get(2)+1 +"";
-            String ano = d.get(1)+"";
+            String dia = d.get(Calendar.DATE)+"";
+            String mes = String.format("%02d", d.get(Calendar.MONTH)+1);
+            String ano = d.get(Calendar.YEAR)+"";
 
             String dataAtual = dia+"/"+mes+"/"+ano;
 
