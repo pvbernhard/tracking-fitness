@@ -2,12 +2,10 @@ package com.lp2final.controle;
 
 import com.lp2final.modelo.Perfil;
 
-import javax.xml.crypto.Data;
 import java.io.*;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.sql.SQLOutput;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
@@ -165,6 +163,7 @@ public class PerfilControle {
 
             System.out.println("1 - Editar Perfil" +
                     "\n2 - Definir metas (Calorias/tempo) " +
+                    "\n3 - Mostras todos os Pesos" +
                     "\n0 - Sair");
             escSub = scan.nextInt();
 
@@ -215,7 +214,7 @@ public class PerfilControle {
                         sub = sub.replace(",",".");
                         a.editarPerfil("Peso", sub);
                         perfil.setPeso(Double.valueOf(sub).doubleValue());
-                        a.perdaDePesoTemp(sub);
+                        a.setPesoArquivo(sub);
 
                     }
                 }
@@ -266,6 +265,18 @@ public class PerfilControle {
                 }
 
 
+            }
+
+            if(escSub == 3){
+
+                System.out.println("Esses sao todos os pesos que voce ja teve...");
+                ArrayList<String> pesos = a.getPesototal();
+                ArrayList<String> data = a.getDataPesoTotal();
+                for(int i = 0;i<pesos.size();i++){
+
+                    System.out.println("Data: "+ data.get(i)+", Kg:"+ pesos.get(i)+"\n");
+
+                }
             }
 
         }
@@ -402,7 +413,7 @@ public class PerfilControle {
 
     }
 
-    public void perdaDePesoTemp(String peso){
+    public void setPesoArquivo(String peso){
 
         BufferedReader conteudo = null;
         String escreverNoArq = "";
@@ -449,11 +460,10 @@ public class PerfilControle {
 
     }
 
-    public void criarArq(){
+    public void criarArq(Perfil p){
 
         BufferedReader conteudo = null;
         String escreverNoArq = "";
-        Perfil p = new Perfil();
 
         try (FileWriter criar = new FileWriter(caminho.toFile(), false);
              BufferedWriter buffer = new BufferedWriter(criar);
@@ -483,6 +493,86 @@ public class PerfilControle {
             }
         }
 
+    }
+
+    public ArrayList<String> getPesototal(){
+
+        BufferedReader conteudo = null;
+        String linha = "";
+        ArrayList<String> pesos = new ArrayList<>();
+
+        try {
+
+            conteudo = new BufferedReader(new FileReader(caminhoPeso.toFile()));
+
+            while ((linha = conteudo.readLine()) != null) {
+
+                String dados[] = linha.split(";");
+
+                pesos.add(dados[1]);
+
+            }
+
+            return pesos;
+
+        } catch (
+                FileNotFoundException e) {
+            System.out.println("Arquivo nao encontrado:" + e.getMessage());
+        } catch (ArrayIndexOutOfBoundsException e) {
+            System.out.println("IndexOutBouds: " + e.getMessage());
+        } catch (IOException e) {
+            System.out.println("IO Erro: " + e.getMessage());
+        } finally {
+            if (conteudo != null) {
+                try {
+                    conteudo.close();
+                } catch (IOException e) {
+                    System.out.println("IO Erro: " + e.getMessage());
+                }
+            }
+        }
+        return null;
+
+    }
+
+    public ArrayList<String> getDataPesoTotal(){
+
+
+        BufferedReader conteudo = null;
+        String linha = "";
+        ArrayList<String> data = new ArrayList<>();
+
+        try {
+
+            conteudo = new BufferedReader(new FileReader(caminhoPeso.toFile()));
+
+            while ((linha = conteudo.readLine()) != null) {
+
+                String dados[] = linha.split(";");
+
+                data.add(dados[0]);
+
+            }
+
+            return data;
+
+        } catch (
+                FileNotFoundException e) {
+            System.out.println("Arquivo nao encontrado:" + e.getMessage());
+        } catch (ArrayIndexOutOfBoundsException e) {
+            System.out.println("IndexOutBouds: " + e.getMessage());
+        } catch (IOException e) {
+            System.out.println("IO Erro: " + e.getMessage());
+        } finally {
+            if (conteudo != null) {
+                try {
+                    conteudo.close();
+                } catch (IOException e) {
+                    System.out.println("IO Erro: " + e.getMessage());
+                }
+            }
+        }
+        return null;
     }
 
 }
