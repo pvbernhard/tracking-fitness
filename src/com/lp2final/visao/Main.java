@@ -24,7 +24,8 @@ public class Main {
         Scanner scanner = new Scanner(System.in);
         int resposta;
 
-        PerfilControle p = new PerfilControle("Perfil");
+        String arquivoPerfil = "Perfil";
+        PerfilControle p = new PerfilControle(arquivoPerfil);
         Menu menu = new Menu();
 
         //Se o arquivo existe entao vai direto para o menu se arquivo nao existe criar um novo perfil
@@ -83,11 +84,16 @@ public class Main {
                 case 1:
                     System.out.println("{Perfil}");
 
-                    menu.perfilMenu(perfil);
-
+                    menu.perfilMenu(arquivoPerfil);
                     break;
                 case 2:
                     System.out.println("{Apresentar Exercícios}");
+
+                    try {
+                        menu.atividadesFisicasMenu(arquivoPerfil);
+                    } catch (Exception e) {
+                        //e.printStackTrace();
+                    }
                     break;
                 case 3:
                     System.out.println("{Apresentar Relatório}");
