@@ -3,6 +3,7 @@ package com.lp2final.controle;
 import com.lp2final.modelo.AtividadeFeita;
 import com.lp2final.modelo.AtividadeFisica;
 import com.lp2final.modelo.Perfil;
+import com.lp2final.modelo.Relatorio;
 
 import java.io.File;
 import java.io.IOException;
@@ -242,6 +243,86 @@ public class Menu {
                     }
                     System.out.println("Pressione [Enter] para continuar...");
                     scanner.nextLine();
+                    break;
+            }
+            if (resposta == 0) {
+                break;
+            }
+        }
+    }
+
+    public void relatorioMenu(String arquivoPerfil) {
+        PerfilControle perfilControle = new PerfilControle(arquivoPerfil);
+        AtividadesControle atividadesControle = new AtividadesControle(arquivoPerfil);
+        ArrayList<AtividadeFeita> atividadesFeitas = new ArrayList<>();
+        try {
+            atividadesFeitas = atividadesControle.lerAtividadesFeitas();
+        } catch (IOException | ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+
+        Scanner scanner = new Scanner(System.in);
+        Relatorio relatorio = new Relatorio(arquivoPerfil);
+        int resposta, atividade, dia, mes, ano;
+        String dataInicial, dataFinal;
+        AtividadeFeita atividadeFeita;
+        String strAtividade, descricao;
+        Integer duracao;
+
+        while(true) {
+            System.out.println("[RELATÓRIO]");
+            System.out.println("[1] Exibir relatório");
+            System.out.println("[0] Sair");
+            resposta = scanner.nextInt();
+            scanner.nextLine();
+
+            switch(resposta) {
+                default:
+                case 0:
+                    resposta = 0;
+                    break;
+                case 1:
+                    System.out.println("[DATA INICIAL]");
+                    System.out.print("Dia: ");
+                    dia = scanner.nextInt();
+                    scanner.nextLine();
+                    System.out.print("Mês: ");
+                    mes = scanner.nextInt();
+                    scanner.nextLine();
+                    System.out.print("Ano: ");
+                    ano = scanner.nextInt();
+                    scanner.nextLine();
+                    dataInicial = String.format("%04d", ano) + "/" + String.format("%02d", mes) + "/" + String.format("%02d", dia);
+                    System.out.println("[DATA FINAL]");
+                    System.out.print("Dia: ");
+                    dia = scanner.nextInt();
+                    scanner.nextLine();
+                    System.out.print("Mês: ");
+                    mes = scanner.nextInt();
+                    scanner.nextLine();
+                    System.out.print("Ano: ");
+                    ano = scanner.nextInt();
+                    scanner.nextLine();
+                    dataFinal = String.format("%04d", ano) + "/" + String.format("%02d", mes) + "/" + String.format("%02d", dia);
+
+                    System.out.println("[PERFIL]");
+                    System.out.printf("Nome: %s\n", perfilControle.getPerfil().getNome());
+                    System.out.printf("Peso: %.2f\n", perfilControle.getPerfil().getPeso());
+                    System.out.printf("Altura: %.2f\n", perfilControle.getPerfil().getAltura());
+                    System.out.printf("Idade: %d\n", perfilControle.getPerfil().getIdade());
+                    System.out.printf("Meta de calorias: %s\n", perfilControle.getPerfil().getMetaCal());
+                    System.out.printf("Meta de tempo: %s\n", perfilControle.getPerfil().getMetaTemp());
+                    System.out.printf("IMC: %.2f (%s)\n", perfilControle.getPerfil().imc(), perfilControle.getPerfil().imcClassificacao());
+
+                    System.out.println("\n[HISTÓRICO DE PESOS]");
+                    System.out.println("...");
+
+                    System.out.println("\n[ATIVIDADES FEITAS]");
+                    for (AtividadeFeita atividadeFeita_ : relatorio.getAtividadesFeitas(dataInicial, dataFinal)) {
+                        System.out.println(atividadeFeita_);
+                    }
+                    System.out.printf("\nMédia de gastos calóricos: %.2f\n", relatorio.getMediaGastosCaloricos(dataInicial, dataFinal));
+                    System.out.printf("Média de atividades por dia: %.2f\n", relatorio.getMediaAtividades(dataInicial, dataFinal));
                     break;
             }
             if (resposta == 0) {
