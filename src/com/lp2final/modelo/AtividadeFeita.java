@@ -2,6 +2,7 @@ package com.lp2final.modelo;
 
 import java.io.Serial;
 import java.io.Serializable;
+import java.time.Instant;
 import java.util.Date;
 
 public class AtividadeFeita implements Serializable {
@@ -11,13 +12,13 @@ public class AtividadeFeita implements Serializable {
 
     private final Perfil perfil;
 
-    private Date data;
+    private Instant data;
     private AtividadeFisica atividadeFisica;
     private String descricao;
     private Integer duracao;
     private Double caloriasPerdidas;
 
-    public AtividadeFeita(Perfil perfil, Date data, AtividadeFisica atividadeFisica, String descricao, Integer duracao) {
+    public AtividadeFeita(Perfil perfil, Instant data, AtividadeFisica atividadeFisica, String descricao, Integer duracao) {
         this.perfil = perfil;
         this.data = data;
         this.atividadeFisica = atividadeFisica;
@@ -26,7 +27,7 @@ public class AtividadeFeita implements Serializable {
         this.updateCaloriasPerdidas();
     }
 
-    public Date getData() {
+    public Instant getData() {
         return data;
     }
 
@@ -46,7 +47,7 @@ public class AtividadeFeita implements Serializable {
         return caloriasPerdidas;
     }
 
-    public void setData(Date data) {
+    public void setData(Instant data) {
         this.data = data;
     }
 
@@ -65,7 +66,11 @@ public class AtividadeFeita implements Serializable {
     }
 
     private void updateCaloriasPerdidas() {
-        this.caloriasPerdidas = this.atividadeFisica.getTaxaCalorias() * this.perfil.getPeso() * this.getDuracao();
+        if (this.atividadeFisica.getTaxaCalorias() != null) {
+            this.caloriasPerdidas = this.atividadeFisica.getTaxaCalorias() * this.perfil.getPeso() * this.getDuracao();
+        } else {
+            this.caloriasPerdidas = null;
+        }
     }
 
     @Override
