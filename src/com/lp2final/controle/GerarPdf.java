@@ -50,7 +50,7 @@ public class GerarPdf {
             tab.addCell(c1);
             c1 = new PdfPCell(new Paragraph("Altura: "+perfil.getAltura()+""));
             tab.addCell(c1);
-            c1 = new PdfPCell(new Paragraph("IMC: "+perfil.imc()));
+            c1 = new PdfPCell(new Paragraph("IMC: "+String.format("%.2f", perfil.imc())));
             tab.addCell(c1);
             c1 = new PdfPCell(new Paragraph("Voce está: "+perfil.imcClassificacao()));
             tab.addCell(c1);
