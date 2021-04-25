@@ -1,5 +1,6 @@
 package com.lp2final.visao;
 
+import com.lp2final.controle.GerarPdf;
 import com.lp2final.controle.Menu;
 import com.lp2final.controle.PerfilControle;
 import com.lp2final.modelo.AtividadeFisica;
@@ -26,6 +27,7 @@ public class Main {
 
         String arquivoPerfil = "Perfil";
         PerfilControle p = new PerfilControle(arquivoPerfil);
+        GerarPdf pdf = new GerarPdf();
         Menu menu = new Menu();
 
         //Se o arquivo existe entao vai direto para o menu se arquivo nao existe criar um novo perfil
@@ -50,22 +52,7 @@ public class Main {
             Perfil criar = new Perfil(nome, idade, altura, peso);
             p.criarArq(criar,p);
         }
-        // pega dados do perfil ja existente
-        ArrayList<String> dados = p.acessaPerfil();
-        String[] dadosParaConversao =  new String[dados.size()];
-        int i =0;
-        while (i < dados.size()){
-            dadosParaConversao[i] = dados.get(i);
-            i++;
-        }
-        nome = dadosParaConversao[0];
-        idade = Integer.valueOf(dadosParaConversao[1]).intValue();
-        altura =  Double.valueOf(dadosParaConversao[2]).doubleValue();
-        peso = Double.valueOf(dadosParaConversao[3]).doubleValue();
-        String cal = dadosParaConversao[5];
-        String temp = dadosParaConversao[6];
 
-        Perfil perfil = new Perfil(nome,idade,altura,peso,temp,cal);
 
         do {
             System.out.println("[MENU]");
@@ -101,6 +88,7 @@ public class Main {
                     break;
                 case 4:
                     System.out.println("{Gerar PDF}");
+                    pdf.criarPdf(arquivoPerfil);
                     break;
                 default:
                     System.out.println("Opção inexistente, voltando ao menu.");

@@ -13,7 +13,10 @@ import java.util.ArrayList;
 
 public class GerarPdf {
 
-    public void criarPdf(Perfil perfil,PerfilControle pp){
+    public void criarPdf(String arquivoPerfil ){
+
+        PerfilControle pp = new PerfilControle(arquivoPerfil);
+        Perfil perfil = pp.getPerfil();
 
         Document doc = new Document();
         String nomePdf = "Relatorio Geral.pdf";
