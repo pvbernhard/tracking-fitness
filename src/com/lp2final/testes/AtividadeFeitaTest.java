@@ -8,8 +8,6 @@ import org.junit.jupiter.api.Test;
 
 import java.time.Instant;
 
-import static org.junit.jupiter.api.Assertions.*;
-
 class AtividadeFeitaTest {
 
     Perfil perfil;

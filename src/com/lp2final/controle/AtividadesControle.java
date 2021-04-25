@@ -1,11 +1,9 @@
 package com.lp2final.controle;
 
-import com.lp2final.lib.AppendingObjectOutputStream;
 import com.lp2final.modelo.AtividadeFeita;
 import com.lp2final.modelo.AtividadeFisica;
 
 import java.io.*;
-import java.lang.reflect.Array;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
@@ -13,18 +11,18 @@ import java.util.ArrayList;
 public class AtividadesControle {
 
     private final String PASTA = "config";
-    private final String EXTENSAO = ".dat";
     private final String strAtividade = "_atividades";
-    private final String strFeitas = "Feitas";
-    private String nomeArquivoAtividades;
-    private String nomeArquivoFeitas;
+    private final String nomeArquivoAtividades;
+    private final String nomeArquivoFeitas;
 
     public AtividadesControle(String nomeArquivo) {
         File pasta = new File(this.PASTA);
         if (!pasta.exists()) {
             pasta.mkdir();
         }
+        String EXTENSAO = ".dat";
         this.nomeArquivoAtividades = nomeArquivo + strAtividade + EXTENSAO;
+        String strFeitas = "Feitas";
         this.nomeArquivoFeitas = nomeArquivo + strAtividade + strFeitas + EXTENSAO;
     }
 
