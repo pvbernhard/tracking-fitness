@@ -1,5 +1,6 @@
 package com.lp2final.visao;
 
+import com.lp2final.controle.GerarPdf;
 import com.lp2final.controle.Menu;
 import com.lp2final.controle.PerfilControle;
 import com.lp2final.modelo.AtividadeFisica;
@@ -25,6 +26,7 @@ public class Main {
         int resposta;
 
         PerfilControle p = new PerfilControle("Perfil");
+        GerarPdf pdf = new GerarPdf();
         Menu menu = new Menu();
 
         //Se o arquivo existe entao vai direto para o menu se arquivo nao existe criar um novo perfil
@@ -94,6 +96,7 @@ public class Main {
                     break;
                 case 4:
                     System.out.println("{Gerar PDF}");
+                    pdf.criarPdf(perfil,p);
                     break;
                 default:
                     System.out.println("Opção inexistente, voltando ao menu.");

@@ -337,7 +337,6 @@ public class PerfilControle {
 
         BufferedReader conteudo = null;
         String escreverNoArq = "";
-        Date data = new Date();
         Calendar d = Calendar.getInstance();
 
         try (FileWriter criar = new FileWriter(caminhoPeso.toFile(), true);

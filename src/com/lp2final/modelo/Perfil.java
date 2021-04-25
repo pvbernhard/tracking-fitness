@@ -46,7 +46,7 @@ public class Perfil {
         return imc;
     }
 
-    private String imcClassificacao(){
+    public String imcClassificacao(){
         if(imc() < 16){
             return "Subpeso Severo";
         }else if(imc() > 16 && imc() < 19.9){
