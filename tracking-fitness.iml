@@ -8,5 +8,37 @@
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="library" name="itextpdf-5.5.13.21" level="project" />
+    <orderEntry type="module-library" scope="TEST">
+      <library name="JUnit5.7.0">
+        <CLASSES>
+          <root url="jar://$MODULE_DIR$/src/com/lp2final/lib/junit-jupiter-5.7.0.jar!/" />
+          <root url="jar://$MODULE_DIR$/src/com/lp2final/lib/junit-jupiter-api-5.7.0.jar!/" />
+          <root url="jar://$MODULE_DIR$/src/com/lp2final/lib/apiguardian-api-1.1.0.jar!/" />
+          <root url="jar://$MODULE_DIR$/src/com/lp2final/lib/opentest4j-1.2.0.jar!/" />
+          <root url="jar://$MODULE_DIR$/src/com/lp2final/lib/junit-platform-commons-1.7.0.jar!/" />
+          <root url="jar://$MODULE_DIR$/src/com/lp2final/lib/junit-jupiter-params-5.7.0.jar!/" />
+          <root url="jar://$MODULE_DIR$/src/com/lp2final/lib/junit-jupiter-engine-5.7.0.jar!/" />
+          <root url="jar://$MODULE_DIR$/src/com/lp2final/lib/junit-platform-engine-1.7.0.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library">
+      <library>
+        <CLASSES>
+          <root url="jar://$MODULE_DIR$/src/com/lp2final/lib/junit-jupiter-5.7.0.jar!/" />
+          <root url="jar://$MODULE_DIR$/src/com/lp2final/lib/junit-jupiter-api-5.7.0.jar!/" />
+          <root url="jar://$MODULE_DIR$/src/com/lp2final/lib/apiguardian-api-1.1.0.jar!/" />
+          <root url="jar://$MODULE_DIR$/src/com/lp2final/lib/opentest4j-1.2.0.jar!/" />
+          <root url="jar://$MODULE_DIR$/src/com/lp2final/lib/junit-platform-commons-1.7.0.jar!/" />
+          <root url="jar://$MODULE_DIR$/src/com/lp2final/lib/junit-jupiter-params-5.7.0.jar!/" />
+          <root url="jar://$MODULE_DIR$/src/com/lp2final/lib/junit-jupiter-engine-5.7.0.jar!/" />
+          <root url="jar://$MODULE_DIR$/src/com/lp2final/lib/junit-platform-engine-1.7.0.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
   </component>
 </module>
