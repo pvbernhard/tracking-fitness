@@ -14,6 +14,12 @@ import java.util.Scanner;
 public class Main {
 
     public static void main(String[] args) {
+
+        // TODO: Gerar PDF
+        // TODO: GUI em texto
+        // TODO: GUI em Swing
+        // TODO: JUnit
+
         Scanner scanner = new Scanner(System.in);
         int resposta;
 
@@ -91,7 +97,6 @@ public class Main {
         } catch (IOException e) {
             System.out.println("Error initializing stream");
         } catch (ClassNotFoundException e) {
-            // TODO Auto-generated catch block
             e.printStackTrace();
         }
 
