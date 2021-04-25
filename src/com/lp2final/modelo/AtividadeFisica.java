@@ -12,7 +12,11 @@ public class AtividadeFisica implements Serializable {
     private Double taxaCalorias;
 
     public AtividadeFisica(String nome, Double taxaCalorias) {
-        this.nome = nome;
+        if (nome.length() < 1) {
+            this.nome = "SEM_NOME";
+        } else {
+            this.nome = nome;
+        }
         this.taxaCalorias = taxaCalorias;
     }
 
