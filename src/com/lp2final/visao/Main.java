@@ -1,6 +1,5 @@
 package com.lp2final.visao;
 
-import com.lp2final.controle.Menu;
 import com.lp2final.controle.PerfilControle;
 import com.lp2final.modelo.AtividadeFisica;
 import com.lp2final.modelo.Perfil;
@@ -25,7 +24,6 @@ public class Main {
         int resposta;
 
         PerfilControle p = new PerfilControle("Perfil");
-        Menu menu = new Menu();
 
         //Se o arquivo existe entao vai direto para o menu se arquivo nao existe criar um novo perfil
         String nome;
@@ -83,7 +81,7 @@ public class Main {
                 case 1:
                     System.out.println("{Perfil}");
 
-                    menu.perfilMenu(perfil);
+                    p.perfilMenu(perfil);
 
                     break;
                 case 2:
