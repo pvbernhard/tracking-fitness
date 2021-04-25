@@ -20,6 +20,10 @@ public class PerfilControle {
     private Path caminho;
     private Path caminhoPeso;
 
+    public PerfilControle(){
+
+    }
+
     public PerfilControle(String nome) {
         this.nome = nome + ".dat";
         this.nomePeso = nome + "Peso.dat";
@@ -509,10 +513,13 @@ public class PerfilControle {
 
     }
 
-    public void criarArq(Perfil p){
+    public void criarArq(Perfil p, PerfilControle pc){
 
         BufferedReader conteudo = null;
         String escreverNoArq = "";
+
+
+        pc.setPesoArquivo(p.getPeso()+"");
 
         try (FileWriter criar = new FileWriter(caminho.toFile(), false);
              BufferedWriter buffer = new BufferedWriter(criar);
@@ -525,6 +532,7 @@ public class PerfilControle {
                     "MetaCal;"+p.getMetaCal()+"\n" +
                     "MetaTemp;"+p.getMetaTemp()+"\n";
             escrever.append(escreverNoArq);
+
 
         } catch (FileNotFoundException e) {
             System.out.println("Arquivo nao encontrado:" + e.getMessage());
