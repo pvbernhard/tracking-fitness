@@ -60,12 +60,26 @@ public class AtividadeFeita implements Serializable {
         return duracao;
     }
 
+    public String getDuracaoFormatada() {
+        int minutos = duracao / 60;
+        int segundos = duracao - minutos * 60;
+        return String.format("%02d:%02d", minutos, segundos);
+    }
+
     public String getDescricao() {
         return descricao;
     }
 
     public Double getCaloriasPerdidas() {
         return caloriasPerdidas;
+    }
+
+    public String getCaloriasFormatada() {
+        if (caloriasPerdidas == null) {
+            return "desconhecido";
+        } else {
+            return String.format("%.2f", caloriasPerdidas);
+        }
     }
 
     public void setData(Instant data) {
@@ -79,6 +93,14 @@ public class AtividadeFeita implements Serializable {
 
     public void setDescricao(String descricao) {
         this.descricao = descricao;
+    }
+
+    public String getDescricaoFormatada() {
+        if (descricao.length() < 1) {
+            return "sem descrição";
+        } else {
+            return String.format("\"%s\"", descricao);
+        }
     }
 
     public void setDuracao(Integer duracao) {
@@ -96,12 +118,9 @@ public class AtividadeFeita implements Serializable {
 
     @Override
     public String toString() {
-        return "AtividadeFeita{" +
-                "data=" + data +
-                ", atividadeFisica=" + atividadeFisica.getNome() +
-                ", descricao='" + descricao + '\'' +
-                ", duracao=" + duracao +
-                ", caloriasPerdidas=" + caloriasPerdidas +
-                '}';
+        return "[" + this.getDia() + "/" + this.getMes() + "/" + this.getAno() + "] " + atividadeFisica.getNome() +
+                ", [duração: " + this.getDuracaoFormatada() +
+                ", calorias: " + this.getCaloriasFormatada() +
+                ", " + this.getDescricaoFormatada() + "]";
     }
 }
