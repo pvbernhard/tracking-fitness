@@ -9,6 +9,8 @@ public class AtividadeFeita implements Serializable {
     @Serial
     private static final long serialVersionUID = 1L;
 
+    private final Perfil perfil;
+
     private Date data;
     private AtividadeFisica atividadeFisica;
     private String descricao;
@@ -16,11 +18,16 @@ public class AtividadeFeita implements Serializable {
     private Double caloriasPerdidas;
 
     public AtividadeFeita(Perfil perfil, Date data, AtividadeFisica atividadeFisica, String descricao, Integer duracao) {
+        this.perfil = perfil;
         this.data = data;
         this.atividadeFisica = atividadeFisica;
         this.descricao = descricao;
         this.duracao = duracao;
-        this.caloriasPerdidas = this.atividadeFisica.getTaxaCalorias() * perfil.getPeso() * duracao;
+        this.updateCaloriasPerdidas();
+    }
+
+    public Date getData() {
+        return data;
     }
 
     public AtividadeFisica getAtividadeFisica() {
@@ -37,6 +44,28 @@ public class AtividadeFeita implements Serializable {
 
     public Double getCaloriasPerdidas() {
         return caloriasPerdidas;
+    }
+
+    public void setData(Date data) {
+        this.data = data;
+    }
+
+    public void setAtividadeFisica(AtividadeFisica atividadeFisica) {
+        this.atividadeFisica = atividadeFisica;
+        this.updateCaloriasPerdidas();
+    }
+
+    public void setDescricao(String descricao) {
+        this.descricao = descricao;
+    }
+
+    public void setDuracao(Integer duracao) {
+        this.duracao = duracao;
+        this.updateCaloriasPerdidas();
+    }
+
+    private void updateCaloriasPerdidas() {
+        this.caloriasPerdidas = this.atividadeFisica.getTaxaCalorias() * this.perfil.getPeso() * this.getDuracao();
     }
 
     @Override
