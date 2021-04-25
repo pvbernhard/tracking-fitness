@@ -115,7 +115,7 @@ public class Gui extends JFrame {
     int altT = tamTela.height;
 
     int larg = (int) (largT*0.3);
-    int alt = (int) (altT*0.3);
+    int alt = (int) (altT*0.5);
 
     public Gui(boolean menu){
         super("Menu");
@@ -123,7 +123,10 @@ public class Gui extends JFrame {
         criarMenuSUperiorMenu();
         criarMenu();
 
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setSize(larg, alt);
+        setLocationRelativeTo(null);
+        setVisible(true);
     }
 
     public void criarMenuSUperiorMenu(){
@@ -239,6 +242,7 @@ public class Gui extends JFrame {
 
                 JOptionPane.showMessageDialog(null,"Cadastro Concluido","Cadastro",JOptionPane.PLAIN_MESSAGE);
                 p.criarArq(perfil,p);
+                Gui g = new Gui(true);
                 dispose();
             }
 
