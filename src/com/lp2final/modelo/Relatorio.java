@@ -1,18 +1,25 @@
 package com.lp2final.modelo;
 
+import com.lp2final.controle.AtividadesControle;
 import com.lp2final.controle.PerfilControle;
 
+import java.io.IOException;
 import java.time.Instant;
 import java.util.ArrayList;
 
 public class Relatorio {
     private final Perfil perfil;
-    private final ArrayList<AtividadeFeita> atividadesFeitas;
+    private ArrayList<AtividadeFeita> atividadesFeitas;
 
-    public Relatorio(String nomeArquivoPerfil, ArrayList<AtividadeFeita> atividadesFeitas) {
+    public Relatorio(String nomeArquivoPerfil) {
         PerfilControle perfilControle = new PerfilControle(nomeArquivoPerfil);
-        this.atividadesFeitas = atividadesFeitas;
-
+        AtividadesControle atividadesControle = new AtividadesControle(nomeArquivoPerfil);
+        this.atividadesFeitas = new ArrayList<>();
+        try {
+            this.atividadesFeitas = atividadesControle.lerAtividadesFeitas();
+        } catch (IOException | ClassNotFoundException e) {
+            e.printStackTrace();
+        }
         this.perfil = perfilControle.getPerfil();
 
         sortAtividadesFeitas();
@@ -33,6 +40,12 @@ public class Relatorio {
         return atividadesFeitas;
     }
 
+    public ArrayList<AtividadeFeita> getAtividadesFeitas(String strDataInicio, String strDataFim) {
+        Instant dataInicio = Instant.parse(strDataInicio.replaceAll("/", "-").concat("T00:00:00Z"));
+        Instant dataFim = Instant.parse(strDataFim.replaceAll("/", "-").concat("T00:00:00Z"));
+        return getAtividadesFeitas(dataInicio, dataFim);
+    }
+
     public ArrayList<AtividadeFeita> getAtividadesFeitas(Instant dataInicio, Instant dataFim) {
         ArrayList<AtividadeFeita> atividades = new ArrayList<>();
 
@@ -46,6 +59,57 @@ public class Relatorio {
         }
 
         return atividades;
+    }
+
+    public double getMediaGastosCaloricos(String strDataInicio, String strDataFim) {
+        Instant dataInicio = Instant.parse(strDataInicio.replaceAll("/", "-").concat("T00:00:00Z"));
+        Instant dataFim = Instant.parse(strDataFim.replaceAll("/", "-").concat("T00:00:00Z"));
+        return getMediaGastosCaloricos(dataInicio, dataFim);
+    }
+
+    public double getMediaGastosCaloricos(Instant dataInicio, Instant dataFim) {
+        ArrayList<AtividadeFeita> atividades = getAtividadesFeitas(dataInicio, dataFim);
+        double somatorio = 0.0;
+        for (AtividadeFeita atividade : atividades) {
+            if (atividade.getCaloriasPerdidas() != null) {
+                somatorio += atividade.getCaloriasPerdidas();
+            }
+        }
+        if (atividades.size() > 0) {
+            return somatorio / atividades.size();
+        } else {
+            return 0.0;
+        }
+    }
+
+    public double getMediaAtividades(String strDataInicio, String strDataFim) {
+        Instant dataInicio = Instant.parse(strDataInicio.replaceAll("/", "-").concat("T00:00:00Z"));
+        Instant dataFim = Instant.parse(strDataFim.replaceAll("/", "-").concat("T00:00:00Z"));
+        return getMediaAtividades(dataInicio, dataFim);
+    }
+
+    public double getMediaAtividades(Instant dataInicio, Instant dataFim) {
+        ArrayList<AtividadeFeita> atividades = getAtividadesFeitas(dataInicio, dataFim);
+        if (atividades.size() == 0) {
+            return 0.0;
+        }
+        ArrayList<Integer> atividadesPorDia = new ArrayList<>();
+        int quantidadeAtividades = 0;
+        String ultimaDia = atividades.get(0).getDia();
+        for (AtividadeFeita atividade : atividades) {
+            if (ultimaDia.equals(atividade.getDia())) {
+                quantidadeAtividades++;
+            } else {
+                atividadesPorDia.add(quantidadeAtividades);
+                quantidadeAtividades = 1;
+            }
+        }
+        atividadesPorDia.add(quantidadeAtividades);
+        double somatorio = 0.0;
+        for (Integer i : atividadesPorDia) {
+            somatorio += (double) i;
+        }
+        return somatorio / (double) atividadesPorDia.size();
     }
 
     private void sortAtividadesFeitas() {
