@@ -18,6 +18,15 @@ public class AtividadeFeita implements Serializable {
     private Integer duracao;
     private Double caloriasPerdidas;
 
+    public AtividadeFeita(Perfil perfil, String data, AtividadeFisica atividadeFisica, String descricao, Integer duracao) {
+        this.perfil = perfil;
+        this.data = Instant.parse(data.replaceAll("/", "-").concat("T00:00:00Z"));
+        this.atividadeFisica = atividadeFisica;
+        this.descricao = descricao;
+        this.duracao = duracao;
+        this.updateCaloriasPerdidas();
+    }
+
     public AtividadeFeita(Perfil perfil, Instant data, AtividadeFisica atividadeFisica, String descricao, Integer duracao) {
         this.perfil = perfil;
         this.data = data;
@@ -31,6 +40,18 @@ public class AtividadeFeita implements Serializable {
         return data;
     }
 
+    public String getDia() {
+        return this.data.toString().substring(8, 10);
+    }
+
+    public String getMes() {
+        return this.data.toString().substring(5, 7);
+    }
+
+    public String getAno() {
+        return this.data.toString().substring(0, 4);
+    }
+
     public AtividadeFisica getAtividadeFisica() {
         return atividadeFisica;
     }
@@ -39,12 +60,26 @@ public class AtividadeFeita implements Serializable {
         return duracao;
     }
 
+    public String getDuracaoFormatada() {
+        int minutos = duracao / 60;
+        int segundos = duracao - minutos * 60;
+        return String.format("%02d:%02d", minutos, segundos);
+    }
+
     public String getDescricao() {
         return descricao;
     }
 
     public Double getCaloriasPerdidas() {
         return caloriasPerdidas;
+    }
+
+    public String getCaloriasFormatada() {
+        if (caloriasPerdidas == null) {
+            return "desconhecido";
+        } else {
+            return String.format("%.2f", caloriasPerdidas);
+        }
     }
 
     public void setData(Instant data) {
@@ -58,6 +93,14 @@ public class AtividadeFeita implements Serializable {
 
     public void setDescricao(String descricao) {
         this.descricao = descricao;
+    }
+
+    public String getDescricaoFormatada() {
+        if (descricao.length() < 1) {
+            return "sem descrição";
+        } else {
+            return String.format("\"%s\"", descricao);
+        }
     }
 
     public void setDuracao(Integer duracao) {
@@ -75,12 +118,9 @@ public class AtividadeFeita implements Serializable {
 
     @Override
     public String toString() {
-        return "AtividadeFeita{" +
-                "data=" + data +
-                ", atividadeFisica=" + atividadeFisica.getNome() +
-                ", descricao='" + descricao + '\'' +
-                ", duracao=" + duracao +
-                ", caloriasPerdidas=" + caloriasPerdidas +
-                '}';
+        return "[" + this.getDia() + "/" + this.getMes() + "/" + this.getAno() + "] " + atividadeFisica.getNome() +
+                ", [duração: " + this.getDuracaoFormatada() +
+                ", calorias: " + this.getCaloriasFormatada() +
+                ", " + this.getDescricaoFormatada() + "]";
     }
 }

@@ -76,15 +76,11 @@ public class Main {
                     break;
                 case 2:
                     System.out.println("{Apresentar Exercícios}");
-
-                    try {
-                        menu.atividadesFisicasMenu(arquivoPerfil);
-                    } catch (Exception e) {
-                        //e.printStackTrace();
-                    }
+                    menu.atividadesFisicasMenu(arquivoPerfil);
                     break;
                 case 3:
                     System.out.println("{Apresentar Relatório}");
+                    menu.relatorioMenu(arquivoPerfil);
                     break;
                 case 4:
                     System.out.println("{Gerar PDF}");
