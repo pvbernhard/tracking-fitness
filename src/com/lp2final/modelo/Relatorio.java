@@ -2,6 +2,7 @@ package com.lp2final.modelo;
 
 import com.lp2final.controle.PerfilControle;
 
+import java.time.Instant;
 import java.util.ArrayList;
 
 public class Relatorio {
@@ -30,6 +31,21 @@ public class Relatorio {
 
     public ArrayList<AtividadeFeita> getAtividadesFeitas() {
         return atividadesFeitas;
+    }
+
+    public ArrayList<AtividadeFeita> getAtividadesFeitas(Instant dataInicio, Instant dataFim) {
+        ArrayList<AtividadeFeita> atividades = new ArrayList<>();
+
+        for (AtividadeFeita atividadeFeita : this.getAtividadesFeitas()) {
+            if (atividadeFeita.getData().isAfter(dataFim) || atividadeFeita.getData().equals(dataFim)) {
+                break;
+            }
+            if (atividadeFeita.getData().isAfter(dataInicio) || atividadeFeita.getData().equals(dataInicio)) {
+                atividades.add(atividadeFeita);
+            }
+        }
+
+        return atividades;
     }
 
     private void sortAtividadesFeitas() {
