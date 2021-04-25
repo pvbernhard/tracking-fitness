@@ -28,21 +28,21 @@ public class Main {
         //Se o arquivo existe entao vai direto para o menu se arquivo nao existe criar um novo perfil
         String nome;
         int idade;
-        double peso,altura;
+        double peso, altura;
 
         if(!p.perfilExist()) {
-            System.out.println("Qual seu nome? ");
+            System.out.println("Qual seu nome?");
             nome = scanner.nextLine();
-            System.out.println("Qual Sua idade? ");
+            System.out.println("Qual sua idade?");
             idade = scanner.nextInt();
             scanner.nextLine();
-            System.out.println("Qual sua altura?(Metros)");
+            System.out.println("Qual sua altura? (metros)");
             altura = scanner.nextDouble();
             scanner.nextLine();
-            System.out.println("Quanto voce pesa?(Kilograma) ");
+            System.out.println("Quanto você pesa? (quilogramas)");
             peso = scanner.nextDouble();
             scanner.nextLine();
-            System.out.println("Perfil Criado.");
+            System.out.println("Perfil criado.");
 
             Perfil criar = new Perfil(nome, idade, altura, peso);
             p.criarArq(criar,p);
@@ -56,9 +56,9 @@ public class Main {
             i++;
         }
         nome = dadosParaConversao[0];
-        idade = Integer.valueOf(dadosParaConversao[1]).intValue();
-        altura =  Double.valueOf(dadosParaConversao[2]).doubleValue();
-        peso = Double.valueOf(dadosParaConversao[3]).doubleValue();
+        idade = Integer.parseInt(dadosParaConversao[1]);
+        altura = Double.parseDouble(dadosParaConversao[2]);
+        peso = Double.parseDouble(dadosParaConversao[3]);
         String cal = dadosParaConversao[5];
         String temp = dadosParaConversao[6];
 
@@ -79,10 +79,7 @@ public class Main {
                     System.out.println("Finalizando.");
                     break;
                 case 1:
-                    System.out.println("{Perfil}");
-
                     p.perfilMenu(perfil);
-
                     break;
                 case 2:
                     System.out.println("{Apresentar Exercícios}");
