@@ -46,6 +46,55 @@ public class PerfilControle {
 
     }
 
+    public Perfil getPerfil(){
+
+        BufferedReader conteudo = null;
+        String linha = "";
+        ArrayList<String> dadosPerfil = new ArrayList<>();
+
+        try {
+
+            conteudo = new BufferedReader(new FileReader(caminho.toFile()));
+
+            while ((linha = conteudo.readLine()) != null) {
+
+                String dados[] = linha.split(";");
+
+                dadosPerfil.add(dados[1]);
+
+            }
+            String nome,imc,cal,temp;
+            int idade;
+            double peso,altura;
+            nome = dadosPerfil.get(0);
+            idade = Integer.valueOf(dadosPerfil.get(1)).intValue();
+            peso = Double.valueOf(dadosPerfil.get(2)).doubleValue();
+            altura = Double.valueOf(dadosPerfil.get(3)).doubleValue();
+            cal = dadosPerfil.get(5);
+            temp = dadosPerfil.get(6);
+            Perfil perfil = new Perfil(nome,idade,altura,peso,temp,cal);
+
+            return perfil;
+        } catch (
+                FileNotFoundException e) {
+            System.out.println("Arquivo nao encontrado:" + e.getMessage());
+        } catch (ArrayIndexOutOfBoundsException e) {
+            System.out.println("IndexOutBouds: " + e.getMessage());
+        } catch (IOException e) {
+            System.out.println("IO Erro: " + e.getMessage());
+        } finally {
+            if (conteudo != null) {
+                try {
+                    conteudo.close();
+                } catch (IOException e) {
+                    System.out.println("IO Erro: " + e.getMessage());
+                }
+            }
+        }
+
+        return null;
+    }
+
     public ArrayList<String> acessaPerfil() {
         BufferedReader conteudo = null;
         String linha = "";
