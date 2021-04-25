@@ -5,15 +5,14 @@ import com.lp2final.controle.PerfilControle;
 import java.util.ArrayList;
 
 public class Relatorio {
-    private Perfil perfil;
-    private PerfilControle perfilControle;
+    private final Perfil perfil;
     private final ArrayList<AtividadeFeita> atividadesFeitas;
 
     public Relatorio(String nomeArquivoPerfil, ArrayList<AtividadeFeita> atividadesFeitas) {
-        this.perfilControle = new PerfilControle(nomeArquivoPerfil);
+        PerfilControle perfilControle = new PerfilControle(nomeArquivoPerfil);
         this.atividadesFeitas = atividadesFeitas;
 
-        // TODO: perfil = this.perfilControle.getPerfil()
+        this.perfil = perfilControle.getPerfil();
 
         sortAtividadesFeitas();
     }
