@@ -164,7 +164,7 @@ public class Menu {
         int resposta, atividade;
         AtividadeFeita atividadeFeita;
         String strAtividade, descricao;
-        Integer duracao;
+        Double duracao;
 
         while(true) {
             System.out.println("[ATIVIDADES]");
@@ -200,8 +200,8 @@ public class Menu {
                         System.out.printf("Atividade: %s\n", atividadesFisicas.get(atividade).getNome());
                         System.out.print("Descrição:\n> ");
                         descricao = scanner.nextLine();
-                        System.out.print("Duração:\n> ");
-                        duracao = scanner.nextInt();
+                        System.out.print("Duração (minutos):\n> ");
+                        duracao = scanner.nextDouble();
                         scanner.nextLine();
                         atividadeFeita = new AtividadeFeita(new PerfilControle(arquivoPerfil).getPerfil(), Instant.now(), atividadesFisicas.get(atividade), descricao, duracao);
                         try {
@@ -217,7 +217,7 @@ public class Menu {
                         System.out.print("Descrição:\n> ");
                         descricao = scanner.nextLine();
                         System.out.print("Duração:\n> ");
-                        duracao = scanner.nextInt();
+                        duracao = scanner.nextDouble();
                         scanner.nextLine();
                         try {
                             atividadesControle.escreverAtividade(new AtividadeFisica(strAtividade, null));
