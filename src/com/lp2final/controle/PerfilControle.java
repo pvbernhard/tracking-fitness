@@ -19,12 +19,15 @@ public class PerfilControle {
     private String nome;
     private String nomePeso;
 
-    private Path caminho = Paths.get(this.PASTA, this.nome);
-    private Path caminhoPeso = Paths.get(this.PASTA,this.nomePeso);
+    private Path caminho;
+    private Path caminhoPeso;
 
     public PerfilControle(String nome) {
         this.nome = nome + ".dat";
         this.nomePeso = nome + "Peso.dat";
+
+        this.caminho = Paths.get(this.PASTA, this.nome);
+        this.caminhoPeso = Paths.get(this.PASTA,this.nomePeso);
     }
 
     public boolean perfilExist(){
