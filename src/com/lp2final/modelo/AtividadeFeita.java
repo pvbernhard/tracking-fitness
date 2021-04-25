@@ -18,6 +18,15 @@ public class AtividadeFeita implements Serializable {
     private Integer duracao;
     private Double caloriasPerdidas;
 
+    public AtividadeFeita(Perfil perfil, String data, AtividadeFisica atividadeFisica, String descricao, Integer duracao) {
+        this.perfil = perfil;
+        this.data = Instant.parse(data.replaceAll("/", "-").concat("T00:00:00Z"));
+        this.atividadeFisica = atividadeFisica;
+        this.descricao = descricao;
+        this.duracao = duracao;
+        this.updateCaloriasPerdidas();
+    }
+
     public AtividadeFeita(Perfil perfil, Instant data, AtividadeFisica atividadeFisica, String descricao, Integer duracao) {
         this.perfil = perfil;
         this.data = data;
@@ -29,6 +38,18 @@ public class AtividadeFeita implements Serializable {
 
     public Instant getData() {
         return data;
+    }
+
+    public String getDia() {
+        return this.data.toString().substring(8, 10);
+    }
+
+    public String getMes() {
+        return this.data.toString().substring(5, 7);
+    }
+
+    public String getAno() {
+        return this.data.toString().substring(0, 4);
     }
 
     public AtividadeFisica getAtividadeFisica() {
