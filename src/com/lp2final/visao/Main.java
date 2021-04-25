@@ -3,14 +3,8 @@ package com.lp2final.visao;
 import com.lp2final.controle.GerarPdf;
 import com.lp2final.controle.Menu;
 import com.lp2final.controle.PerfilControle;
-import com.lp2final.modelo.AtividadeFisica;
 import com.lp2final.modelo.Perfil;
 
-import java.io.*;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
-import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Main {
