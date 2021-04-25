@@ -2,8 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="c431046e-a224-4980-abdc-353ca7871d09" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/itextpdf_5_5_13_2.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/tracking-fitness.iml" beforeDir="false" afterPath="$PROJECT_DIR$/tracking-fitness.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -43,17 +43,6 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration default="true" type="ArquillianJUnit" factoryName="" nameIsGenerated="true">
-      <option name="arquillianRunConfiguration">
-        <value>
-          <option name="containerStateName" value="" />
-        </value>
-      </option>
-      <option name="TEST_OBJECT" value="class" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
     <recent_temporary>
       <list>
         <item itemvalue="Application.CriarPerfil" />
@@ -69,6 +58,7 @@
       <option name="presentableId" value="Default" />
       <updated>1619314135331</updated>
       <workItem from="1619314138580" duration="362000" />
+      <workItem from="1619317957673" duration="107000" />
     </task>
     <servers />
   </component>
@@ -85,5 +75,6 @@
         </entry>
       </map>
     </option>
+    <option name="oldMeFiltersMigrated" value="true" />
   </component>
 </project>
