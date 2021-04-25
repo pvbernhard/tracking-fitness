@@ -15,10 +15,10 @@ public class AtividadeFeita implements Serializable {
     private Instant data;
     private AtividadeFisica atividadeFisica;
     private String descricao;
-    private Integer duracao;
+    private Double duracao;
     private Double caloriasPerdidas;
 
-    public AtividadeFeita(Perfil perfil, String data, AtividadeFisica atividadeFisica, String descricao, Integer duracao) {
+    public AtividadeFeita(Perfil perfil, String data, AtividadeFisica atividadeFisica, String descricao, Double duracao) {
         this.perfil = perfil;
         this.data = Instant.parse(data.replaceAll("/", "-").concat("T00:00:00Z"));
         this.atividadeFisica = atividadeFisica;
@@ -27,7 +27,7 @@ public class AtividadeFeita implements Serializable {
         this.updateCaloriasPerdidas();
     }
 
-    public AtividadeFeita(Perfil perfil, Instant data, AtividadeFisica atividadeFisica, String descricao, Integer duracao) {
+    public AtividadeFeita(Perfil perfil, Instant data, AtividadeFisica atividadeFisica, String descricao, Double duracao) {
         this.perfil = perfil;
         this.data = data;
         this.atividadeFisica = atividadeFisica;
@@ -56,13 +56,14 @@ public class AtividadeFeita implements Serializable {
         return atividadeFisica;
     }
 
-    public Integer getDuracao() {
+    public Double getDuracao() {
         return duracao;
     }
 
     public String getDuracaoFormatada() {
-        int minutos = duracao / 60;
-        int segundos = duracao - minutos * 60;
+        int duracaoSegundos = (int) (duracao * 60.0);
+        int minutos = duracaoSegundos / 60;
+        int segundos = duracaoSegundos - minutos * 60;
         return String.format("%02d:%02d", minutos, segundos);
     }
 
@@ -103,7 +104,7 @@ public class AtividadeFeita implements Serializable {
         }
     }
 
-    public void setDuracao(Integer duracao) {
+    public void setDuracao(Double duracao) {
         this.duracao = duracao;
         this.updateCaloriasPerdidas();
     }
