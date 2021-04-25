@@ -72,8 +72,8 @@ public class PerfilControle {
             double peso,altura;
             nome = dadosPerfil.get(0);
             idade = Integer.valueOf(dadosPerfil.get(1)).intValue();
-            peso = Double.valueOf(dadosPerfil.get(2)).doubleValue();
-            altura = Double.valueOf(dadosPerfil.get(3)).doubleValue();
+            altura = Double.valueOf(dadosPerfil.get(2)).doubleValue();
+            peso = Double.valueOf(dadosPerfil.get(3)).doubleValue();
             cal = dadosPerfil.get(5);
             temp = dadosPerfil.get(6);
             Perfil perfil = new Perfil(nome,idade,altura,peso,temp,cal);
