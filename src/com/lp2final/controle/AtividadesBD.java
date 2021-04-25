@@ -7,17 +7,17 @@ import java.util.ArrayList;
 
 public class AtividadesBD {
 
-    public AtividadesBD(String nomeArquivo) throws IOException {
+    public AtividadesBD(String nomeArquivo) throws IOException, ClassNotFoundException {
         this.salvarParaArquivo(nomeArquivo);
     }
 
-    private void salvarParaArquivo(String nomeArquivo) throws IOException {
+    private void salvarParaArquivo(String nomeArquivo) throws IOException, ClassNotFoundException {
         AtividadesControle atividadesControle = new AtividadesControle(nomeArquivo);
 
         ArrayList<AtividadeFisica> bd = this.BD();
 
         for(AtividadeFisica atividadeFisica : bd) {
-            atividadesControle.escreverAtividade(atividadeFisica, false);
+            atividadesControle.escreverAtividade(atividadeFisica);
         }
     }
 

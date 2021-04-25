@@ -5,6 +5,7 @@ import com.lp2final.modelo.AtividadeFeita;
 import com.lp2final.modelo.AtividadeFisica;
 
 import java.io.*;
+import java.lang.reflect.Array;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
@@ -12,91 +13,91 @@ import java.util.ArrayList;
 public class AtividadesControle {
 
     private final String PASTA = "config";
-    private String nomeArquivo;
+    private final String EXTENSAO = ".dat";
+    private final String strAtividade = "_atividades";
+    private final String strFeitas = "Feitas";
+    private String nomeArquivoAtividades;
+    private String nomeArquivoFeitas;
 
     public AtividadesControle(String nomeArquivo) {
         File pasta = new File(this.PASTA);
         if (!pasta.exists()) {
             pasta.mkdir();
         }
-        this.nomeArquivo = nomeArquivo;
+        this.nomeArquivoAtividades = nomeArquivo + strAtividade + EXTENSAO;
+        this.nomeArquivoFeitas = nomeArquivo + strAtividade + strFeitas + EXTENSAO;
     }
 
-    public String getNomeArquivo() {
-        return nomeArquivo;
-    }
-    
-    public Path getCaminho() {
-        return Paths.get(this.PASTA, this.nomeArquivo);
+    public String getStrAtividade() {
+        return strAtividade;
     }
 
-    public void setNomeArquivo(String nomeArquivo) {
-        this.nomeArquivo = nomeArquivo;
+    public String getNomeArquivoAtividades() {
+        return nomeArquivoAtividades;
     }
 
-    public void escreverAtividade(AtividadeFisica atividadeFisica) throws IOException {
-        this.escreverAtividade(atividadeFisica, true);
+    public String getNomeArquivoFeitas() {
+        return nomeArquivoFeitas;
     }
 
-    public void escreverAtividade(AtividadeFisica atividadeFisica, Boolean acrescentar) throws IOException {
-        if (this.getCaminho().toFile().exists()) {
-            FileOutputStream outputArquivo = new FileOutputStream(this.getCaminho().toFile(), acrescentar);
-            AppendingObjectOutputStream outputObjeto = new AppendingObjectOutputStream(outputArquivo);
+    public Path getCaminhoAtividades() {
+        return Paths.get(this.PASTA, getNomeArquivoAtividades());
+    }
 
-            outputObjeto.writeObject(atividadeFisica);
+    public Path getCaminhoFeitas() {
+        return Paths.get(this.PASTA, getNomeArquivoFeitas());
+    }
 
-            outputObjeto.close();
-            outputArquivo.close();
+    public void escreverAtividade(AtividadeFisica atividadeFisica) throws IOException, ClassNotFoundException {
+        this.getCaminhoAtividades().toFile().createNewFile();
+
+        ArrayList<AtividadeFisica> atividadesFisicas;
+        if (this.getCaminhoAtividades().toFile().length() <= 1) {
+            atividadesFisicas = new ArrayList<>();
         } else {
-            FileOutputStream outputArquivo = new FileOutputStream(this.getCaminho().toFile(), acrescentar);
-            ObjectOutputStream outputObjeto = new ObjectOutputStream(outputArquivo);
-
-            outputObjeto.writeObject(atividadeFisica);
-
-            outputObjeto.close();
-            outputArquivo.close();
+            atividadesFisicas = this.lerAtividades();
         }
+
+        atividadesFisicas.add(atividadeFisica);
+
+        FileOutputStream outputArquivo = new FileOutputStream(this.getCaminhoAtividades().toFile(), false);
+        ObjectOutputStream outputObjeto = new ObjectOutputStream(outputArquivo);
+
+        outputObjeto.writeObject(atividadesFisicas);
+
+        outputObjeto.close();
+        outputArquivo.close();
     }
 
-    public void escreverAtividadeFeita(AtividadeFeita atividadeFeita) throws IOException {
-        this.escreverAtividadeFeita(atividadeFeita, true);
-    }
+    public void escreverAtividadeFeita(AtividadeFeita atividadeFeita) throws IOException, ClassNotFoundException {
+        this.getCaminhoFeitas().toFile().createNewFile();
 
-    public void escreverAtividadeFeita(AtividadeFeita atividadeFeita, Boolean acrescentar) throws IOException {
-        if (this.getCaminho().toFile().exists()) {
-            FileOutputStream outputArquivo = new FileOutputStream(this.getCaminho().toFile(), acrescentar);
-            AppendingObjectOutputStream outputObjeto = new AppendingObjectOutputStream(outputArquivo);
-
-            outputObjeto.writeObject(atividadeFeita);
-
-            outputObjeto.close();
-            outputArquivo.close();
+        ArrayList<AtividadeFeita> atividadesFeitas;
+        if (this.getCaminhoFeitas().toFile().length() <= 1) {
+            atividadesFeitas = new ArrayList<>();
         } else {
-            FileOutputStream outputArquivo = new FileOutputStream(this.getCaminho().toFile(), acrescentar);
-            ObjectOutputStream outputObjeto = new ObjectOutputStream(outputArquivo);
-
-            outputObjeto.writeObject(atividadeFeita);
-
-            outputObjeto.close();
-            outputArquivo.close();
+            atividadesFeitas = this.lerAtividadesFeitas();
         }
+
+        atividadesFeitas.add(atividadeFeita);
+
+        FileOutputStream outputArquivo = new FileOutputStream(this.getCaminhoFeitas().toFile(), false);
+        ObjectOutputStream outputObjeto = new ObjectOutputStream(outputArquivo);
+
+        outputObjeto.writeObject(atividadesFeitas);
+
+        outputObjeto.close();
+        outputArquivo.close();
     }
 
     public ArrayList<AtividadeFisica> lerAtividades() throws IOException, ClassNotFoundException {
-        FileInputStream inputArquivo = new FileInputStream(this.getCaminho().toFile());
+        if (!this.getCaminhoAtividades().toFile().exists()) {
+            return new ArrayList<>();
+        }
+        FileInputStream inputArquivo = new FileInputStream(this.getCaminhoAtividades().toFile());
         ObjectInputStream inputObjeto = new ObjectInputStream(inputArquivo);
 
-        AtividadeFisica atividadeTemp;
-        ArrayList<AtividadeFisica> atividades = new ArrayList<>();
-
-        while (true) {
-            try {
-                atividadeTemp = (AtividadeFisica) inputObjeto.readObject();
-                atividades.add(atividadeTemp);
-            } catch (EOFException e) {
-                break;
-            }
-        }
+        ArrayList<AtividadeFisica> atividades = (ArrayList<AtividadeFisica>) inputObjeto.readObject();
 
         inputObjeto.close();
         inputArquivo.close();
@@ -105,20 +106,13 @@ public class AtividadesControle {
     }
 
     public ArrayList<AtividadeFeita> lerAtividadesFeitas() throws IOException, ClassNotFoundException {
-        FileInputStream inputArquivo = new FileInputStream(this.getCaminho().toFile());
+        if (!this.getCaminhoFeitas().toFile().exists()) {
+            return new ArrayList<>();
+        }
+        FileInputStream inputArquivo = new FileInputStream(this.getCaminhoFeitas().toFile());
         ObjectInputStream inputObjeto = new ObjectInputStream(inputArquivo);
 
-        AtividadeFeita atividadeTemp;
-        ArrayList<AtividadeFeita> atividades = new ArrayList<>();
-
-        while (true) {
-            try {
-                atividadeTemp = (AtividadeFeita) inputObjeto.readObject();
-                atividades.add(atividadeTemp);
-            } catch (EOFException e) {
-                break;
-            }
-        }
+        ArrayList<AtividadeFeita> atividades = (ArrayList<AtividadeFeita>) inputObjeto.readObject();
 
         inputObjeto.close();
         inputArquivo.close();

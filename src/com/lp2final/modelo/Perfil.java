@@ -4,8 +4,10 @@ import java.io.*;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 
-public class Perfil {
+public class Perfil implements Serializable {
 
+    @Serial
+    private static final long serialVersionUID = 1L;
 
     private String nome;
     private int idade;
