@@ -150,8 +150,7 @@ public class Menu {
 
     public void atividadesFisicasMenu(String arquivoPerfil) {
         AtividadesControle atividadesControle = new AtividadesControle(arquivoPerfil);
-        String arquivoAtividades = arquivoPerfil + atividadesControle.getStrAtividade();
-        if (!(new File(arquivoAtividades)).exists()) {
+        if (!atividadesControle.getCaminhoAtividades().toFile().exists()) {
             try {
                 new AtividadesBD(arquivoPerfil);
             } catch (IOException | ClassNotFoundException e) {
