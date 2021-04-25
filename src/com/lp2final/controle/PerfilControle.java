@@ -481,7 +481,7 @@ public class PerfilControle {
             String mes = d.get(2)+1 +"";
             String ano = d.get(1)+"";
 
-            String dataAtual = dia+":"+mes+":"+ano;
+            String dataAtual = dia+"/"+mes+"/"+ano;
 
             if(perfilPesoExist()){
                 if(dataRepetida(dataAtual)){
@@ -630,6 +630,13 @@ public class PerfilControle {
             }
         }
         return null;
+    }
+
+    public void deletePerfil(){
+
+        caminho.toFile().delete();
+        caminhoPeso.toFile().delete();
+
     }
 
 }
