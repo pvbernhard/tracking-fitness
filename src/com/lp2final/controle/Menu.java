@@ -255,6 +255,8 @@ public class Menu {
         PerfilControle perfilControle = new PerfilControle(arquivoPerfil);
         AtividadesControle atividadesControle = new AtividadesControle(arquivoPerfil);
         ArrayList<AtividadeFeita> atividadesFeitas = new ArrayList<>();
+        ArrayList<String> dataPesoTotal = perfilControle.getDataPesoTotal();
+        ArrayList<String> pesoTotal = perfilControle.getPesototal();
         try {
             atividadesFeitas = atividadesControle.lerAtividadesFeitas();
         } catch (IOException | ClassNotFoundException e) {
@@ -315,7 +317,9 @@ public class Menu {
                     System.out.printf("IMC: %.2f (%s)\n", perfilControle.getPerfil().imc(), perfilControle.getPerfil().imcClassificacao());
 
                     System.out.println("\n[HISTÓRICO DE PESOS]");
-                    System.out.println("...");
+                    for (int i = 0; i < dataPesoTotal.size(); i++) {
+                        System.out.printf("[%s] %s kg\n", dataPesoTotal.get(i), pesoTotal.get(i));
+                    }
 
                     System.out.println("\n[ATIVIDADES FEITAS]");
                     for (AtividadeFeita atividadeFeita_ : relatorio.getAtividadesFeitas(dataInicial, dataFinal)) {
