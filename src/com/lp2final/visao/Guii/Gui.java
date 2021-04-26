@@ -25,6 +25,11 @@ public class Gui extends JFrame {
         super("Criar Perfil");//criar nome da janela
         criarMenuSuperiorDeCriarPerfil();
         criarFormulario();
+
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);//definir o padrao de fechamento para de fato fecha e nao oculta
+        setLocationRelativeTo(null);
+        setVisible(true);//mostra janela
+
     }
     //criaçao do perfil
     public void criarMenuSuperiorDeCriarPerfil(){
