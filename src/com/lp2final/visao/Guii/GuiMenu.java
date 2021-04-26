@@ -1,6 +1,7 @@
 package com.lp2final.visao.Guii;
 
 import com.lp2final.controle.GerarPdf;
+import com.lp2final.modelo.Relatorio;
 
 import javax.swing.*;
 import java.awt.*;
@@ -81,6 +82,13 @@ public class GuiMenu extends JFrame {
             g.menu();
         });
         JButton botaoRelatorio = new JButton("Relatorio");
+        botaoRelatorio.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                Relatorio relatorio = new Relatorio(arquivoPerfil);
+                JOptionPane.showMessageDialog(null, relatorio,"Relatório", JOptionPane.PLAIN_MESSAGE);
+            }
+        });
         JButton botaoPdf = new JButton("Gerar PDF");
         botaoPdf.addActionListener(pdfCriar);
 
