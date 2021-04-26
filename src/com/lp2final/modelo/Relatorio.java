@@ -135,7 +135,7 @@ public class Relatorio {
                 "\n[HISTÓRICO DE PESOS]\n");
 
         for (int i = 0; i < perfilControle.getDataPesoTotal().size(); i++) {
-            texto.append(String.format("[%s] %s kg\n", perfilControle.getDataPesoTotal().get(i), perfilControle.getDataPesoTotal().get(i)));
+            texto.append(String.format("[%s] %s kg\n", perfilControle.getDataPesoTotal().get(i), perfilControle.getPesototal().get(i)));
         }
         texto.append("\n[ATIVIDADES FEITAS]\n");
         for (AtividadeFeita atividadeFeita_ : this.getAtividadesFeitas(Instant.MIN, Instant.MAX)) {
