@@ -56,9 +56,10 @@ public class Modificador extends JFrame{
         setVisible(true);
     }
 
-    public Modificador(AtividadeFeita atividadeFeita) {
+    public Modificador(AtividadeFeita atividadeFeita, String nomeArquivo) {
         super("Atividade");
         this.atividadeFeita = atividadeFeita;
+        this.nomeArquivo = nomeArquivo;
 
         setSize(larg, alt);
         setLocationRelativeTo(null);
