@@ -497,7 +497,7 @@ public class Modificador extends JFrame{
         @Override
         public void actionPerformed(ActionEvent e) {
             String nome = idadeF.getText();
-            p.editarPerfil("Nome", nome);
+            p.editarPerfil("Idade", nome);
             perfil.setIdade(Integer.parseInt(nome));
             dispose();
         }
@@ -508,7 +508,7 @@ public class Modificador extends JFrame{
         @Override
         public void actionPerformed(ActionEvent e) {
             String nome = alturaF.getText();
-            p.editarPerfil("Nome", nome);
+            p.editarPerfil("Altura", nome);
             perfil.setAltura(Double.parseDouble(nome));
             dispose();
         }
@@ -519,7 +519,7 @@ public class Modificador extends JFrame{
         @Override
         public void actionPerformed(ActionEvent e) {
             String nome = pesoF.getText();
-            p.editarPerfil("Nome", nome);
+            p.editarPerfil("Peso", nome);
             perfil.setPeso(Double.parseDouble(nome));
             dispose();
         }
