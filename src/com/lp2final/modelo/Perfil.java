@@ -55,7 +55,7 @@ public class Perfil implements Serializable {
         }else if(imc() > 25 && imc() < 29.9){
             return "Sobrepeso";
         }else if(imc() > 30 && imc() < 39.9){
-            return "Obesa";
+            return "Obeso";
         }else{
             return "Obeso Mórbido";
         }
