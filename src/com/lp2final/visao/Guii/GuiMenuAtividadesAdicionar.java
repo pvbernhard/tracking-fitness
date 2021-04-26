@@ -1,5 +1,6 @@
 package com.lp2final.visao.Guii;
 
+import com.lp2final.controle.AtividadesBD;
 import com.lp2final.controle.AtividadesControle;
 import com.lp2final.controle.PerfilControle;
 import com.lp2final.modelo.AtividadeFeita;
@@ -32,7 +33,15 @@ public class GuiMenuAtividadesAdicionar extends JFrame {
         super("Menu");
         this.arquivoPerfil = arquivoPerfil;
 
-        setSize(larg, alt);
+        try {
+            if (new AtividadesControle(arquivoPerfil).lerAtividades().size() == 0) {
+                AtividadesBD atividadesBD = new AtividadesBD(arquivoPerfil);
+            }
+
+            setSize(larg, alt);
+        } catch (IOException | ClassNotFoundException e) {
+            e.printStackTrace();
+        }
         setLocationRelativeTo(null);
         setVisible(true);
     }
