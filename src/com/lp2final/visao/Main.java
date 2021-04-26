@@ -14,11 +14,6 @@ public class Main {
 
     public static void main(String[] args) {
 
-        // TODO: Gerar PDF
-        // TODO: GUI em texto | Falta relatório e PDF
-        // TODO: GUI em Swing
-        // TODO: JUnit
-
         String arquivoPerfil = "Perfil";
         PerfilControle p = new PerfilControle(arquivoPerfil);
         //Gui
