@@ -84,9 +84,9 @@ public class GuiMenuPerfil extends JFrame {
         panelVolta.add(botaoVolta);
 
         //adiciona cade painel em seua posiçoes podem ser (NORTH, SOUTH,WEST,EAST,CENTER)
-        add(panelTitulo ,BorderLayout.NORTH );
-        add(panelBoteoes , BorderLayout.CENTER);
-        add(panelVolta , BorderLayout.SOUTH);
+        add(panelTitulo, BorderLayout.NORTH );
+        add(panelBoteoes, BorderLayout.CENTER);
+        add(panelVolta, BorderLayout.SOUTH);
 
         //adiciona cade painel em seua posiçoes podem ser (NORTH, SOUTH,WEST,EAST,CENTER)
 
