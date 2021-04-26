@@ -5,11 +5,9 @@ import com.lp2final.modelo.AtividadeFisica;
 import com.lp2final.modelo.Perfil;
 import com.lp2final.modelo.Relatorio;
 
-import java.io.File;
 import java.io.IOException;
 import java.time.Instant;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.Scanner;
 
 public class Menu {
@@ -26,10 +24,11 @@ public class Menu {
 
             perfil.mostraPerfil();
 
-            System.out.println("1 - Editar Perfil" +
-                    "\n2 - Definir metas (Calorias/tempo) " +
-                    "\n3 - Mostras todos os Pesos" +
-                    "\n0 - Sair");
+            System.out.println("""
+                    1 - Editar Perfil
+                    2 - Definir metas (Calorias/tempo)
+                    3 - Mostras todos os Pesos
+                    0 - Sair""");
             escSub = scan.nextInt();
             scan.nextLine();
 
@@ -41,14 +40,15 @@ public class Menu {
 
                 while (true) {
                     System.out.println("**** Edita ****");
-                    String sub = "";
+                    String sub;
                     int alterar;
 
-                    System.out.println("1 - Alterar o nome" +
-                            "\n2 - Alterar Idade" +
-                            "\n3 - Alterar Alturar" +
-                            "\n4 - Alterar Peso" +
-                            "\n0 - Sair");
+                    System.out.println("""
+                            1 - Alterar o nome
+                            2 - Alterar Idade
+                            3 - Alterar Alturar
+                            4 - Alterar Peso
+                            0 - Sair""");
                     alterar = scan.nextInt();
                     scan.nextLine();
                     if(alterar == 0){
@@ -65,21 +65,21 @@ public class Menu {
                         System.out.println("Digite Sua nova idade");
                         sub = scan.nextLine();
                         a.editarPerfil("Idade", sub);
-                        perfil.setIdade( Integer.valueOf(sub).intValue());
+                        perfil.setIdade(Integer.parseInt(sub));
                     }
                     if (alterar == 3) {
                         System.out.println("Digite Sua nova altura");
                         sub = scan.nextLine();
                         sub = sub.replace(",",".");
                         a.editarPerfil("Altura", sub);
-                        perfil.setAltura( Double.valueOf(sub).doubleValue());
+                        perfil.setAltura(Double.parseDouble(sub));
                     }
                     if (alterar == 4) {
                         System.out.println("Digite Seu novo peso");
                         sub = scan.nextLine();
                         sub = sub.replace(",",".");
                         a.editarPerfil("Peso", sub);
-                        perfil.setPeso(Double.valueOf(sub).doubleValue());
+                        perfil.setPeso(Double.parseDouble(sub));
                         a.setPesoArquivo(sub);
 
                     }
@@ -91,9 +91,10 @@ public class Menu {
 
                 while(true){
                     System.out.println("**** Metas ****");
-                    System.out.println("1 - Definir metas de por dia Calorias" +
-                            "\n2 - Definir metas de tempo de exercicios por dia" +
-                            "\n0 - Sair");
+                    System.out.println("""
+                            1 - Definir metas de por dia Calorias
+                            2 - Definir metas de tempo de exercicios por dia
+                            0 - Sair""");
                     int d;
                     String meta;
                     d = scan.nextInt();
@@ -164,9 +165,9 @@ public class Menu {
         int resposta, atividade;
         AtividadeFeita atividadeFeita;
         String strAtividade, descricao;
-        Double duracao;
+        double duracao;
 
-        while(true) {
+        do {
             System.out.println("[ATIVIDADES]");
             System.out.println("[1] Adicionar atividade física");
             System.out.println("[2] Listar atividades feitas");
@@ -174,7 +175,7 @@ public class Menu {
             resposta = scanner.nextInt();
             scanner.nextLine();
 
-            switch(resposta) {
+            switch (resposta) {
                 default:
                 case 0:
                     resposta = 0;
@@ -188,7 +189,7 @@ public class Menu {
                     }
                     System.out.println("[ADICIONAR ATIVIDADE FÍSICA]");
                     for (int i = 1; i <= atividadesFisicas.size(); i++) {
-                        System.out.printf("[%d] %s\n", i, atividadesFisicas.get(i-1).getNome());
+                        System.out.printf("[%d] %s\n", i, atividadesFisicas.get(i - 1).getNome());
                     }
                     System.out.printf("\n[%d] Nova atividade\n", atividadesFisicas.size() + 1);
                     System.out.println("[0] Sair");
@@ -216,7 +217,7 @@ public class Menu {
                         strAtividade = scanner.nextLine();
                         System.out.print("Descrição:\n> ");
                         descricao = scanner.nextLine();
-                        System.out.print("Duração:\n> ");
+                        System.out.print("Duração (minutos):\n> ");
                         duracao = scanner.nextDouble();
                         scanner.nextLine();
                         try {
@@ -236,7 +237,7 @@ public class Menu {
                     }
                     System.out.println("[ATIVIDADES FEITAS]");
                     for (int i = 1; i <= atividadesFeitas.size(); i++) {
-                        System.out.printf("[%d] %s\n", i, atividadesFeitas.get(i-1));
+                        System.out.printf("[%d] %s\n", i, atividadesFeitas.get(i - 1));
                     }
                     if (atividadesFeitas.size() == 0) {
                         System.out.println("Não há nenhuma atividade feita.");
@@ -245,40 +246,27 @@ public class Menu {
                     scanner.nextLine();
                     break;
             }
-            if (resposta == 0) {
-                break;
-            }
-        }
+        } while (resposta != 0);
     }
 
     public void relatorioMenu(String arquivoPerfil) {
         PerfilControle perfilControle = new PerfilControle(arquivoPerfil);
-        AtividadesControle atividadesControle = new AtividadesControle(arquivoPerfil);
-        ArrayList<AtividadeFeita> atividadesFeitas = new ArrayList<>();
         ArrayList<String> dataPesoTotal = perfilControle.getDataPesoTotal();
         ArrayList<String> pesoTotal = perfilControle.getPesototal();
-        try {
-            atividadesFeitas = atividadesControle.lerAtividadesFeitas();
-        } catch (IOException | ClassNotFoundException e) {
-            e.printStackTrace();
-        }
 
         Scanner scanner = new Scanner(System.in);
         Relatorio relatorio = new Relatorio(arquivoPerfil);
-        int resposta, atividade, dia, mes, ano;
+        int resposta, dia, mes, ano;
         String dataInicial, dataFinal;
-        AtividadeFeita atividadeFeita;
-        String strAtividade, descricao;
-        Integer duracao;
 
-        while(true) {
+        do {
             System.out.println("[RELATÓRIO]");
             System.out.println("[1] Exibir relatório");
             System.out.println("[0] Sair");
             resposta = scanner.nextInt();
             scanner.nextLine();
 
-            switch(resposta) {
+            switch (resposta) {
                 default:
                 case 0:
                     resposta = 0;
@@ -329,10 +317,7 @@ public class Menu {
                     System.out.printf("Média de atividades por dia: %.2f\n", relatorio.getMediaAtividades(dataInicial, dataFinal));
                     break;
             }
-            if (resposta == 0) {
-                break;
-            }
-        }
+        } while (resposta != 0);
     }
 
 }

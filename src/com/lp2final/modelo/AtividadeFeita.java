@@ -3,7 +3,6 @@ package com.lp2final.modelo;
 import java.io.Serial;
 import java.io.Serializable;
 import java.time.Instant;
-import java.util.Date;
 
 public class AtividadeFeita implements Serializable {
 

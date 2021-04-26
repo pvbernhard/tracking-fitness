@@ -8,8 +8,8 @@ public class AtividadeFisica implements Serializable {
     @Serial
     private static final long serialVersionUID = 1L;
 
-    private String nome;
-    private Double taxaCalorias;
+    private final String nome;
+    private final Double taxaCalorias;
 
     public AtividadeFisica(String nome, Double taxaCalorias) {
         if (nome.length() < 1) {

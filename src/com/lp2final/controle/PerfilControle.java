@@ -8,14 +8,8 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.Date;
-import java.util.Scanner;
 
 public class PerfilControle {
-
-    private final String PASTA = "config";
-    private String nome;
-    private String nomePeso;
 
     private Path caminho;
     private Path caminhoPeso;
@@ -25,35 +19,28 @@ public class PerfilControle {
     }
 
     public PerfilControle(String nome) {
-        this.nome = nome + ".dat";
-        this.nomePeso = nome + "Peso.dat";
+        String nome1 = nome + ".dat";
+        String nomePeso = nome + "Peso.dat";
 
-        this.caminho = Paths.get(this.PASTA, this.nome);
-        this.caminhoPeso = Paths.get(this.PASTA,this.nomePeso);
+        String PASTA = "config";
+        this.caminho = Paths.get(PASTA, nome1);
+        this.caminhoPeso = Paths.get(PASTA, nomePeso);
     }
 
     public boolean perfilExist(){
-        if(Files.exists( caminho )){
-            return true;
-        }else{
-            return false;
-        }
+        return Files.exists(caminho);
 
     }
 
     public boolean perfilPesoExist(){
-        if(Files.exists( caminhoPeso )){
-            return true;
-        }else{
-            return false;
-        }
+        return Files.exists(caminhoPeso);
 
     }
 
     public Perfil getPerfil(){
 
         BufferedReader conteudo = null;
-        String linha = "";
+        String linha;
         ArrayList<String> dadosPerfil = new ArrayList<>();
 
         try {
@@ -62,23 +49,22 @@ public class PerfilControle {
 
             while ((linha = conteudo.readLine()) != null) {
 
-                String dados[] = linha.split(";");
+                String[] dados = linha.split(";");
 
                 dadosPerfil.add(dados[1]);
 
             }
-            String nome,imc,cal,temp;
+            String nome,cal,temp;
             int idade;
             double peso,altura;
             nome = dadosPerfil.get(0);
-            idade = Integer.valueOf(dadosPerfil.get(1)).intValue();
-            altura = Double.valueOf(dadosPerfil.get(2)).doubleValue();
-            peso = Double.valueOf(dadosPerfil.get(3)).doubleValue();
+            idade = Integer.parseInt(dadosPerfil.get(1));
+            altura = Double.parseDouble(dadosPerfil.get(2));
+            peso = Double.parseDouble(dadosPerfil.get(3));
             cal = dadosPerfil.get(5);
             temp = dadosPerfil.get(6);
-            Perfil perfil = new Perfil(nome,idade,altura,peso,temp,cal);
 
-            return perfil;
+            return new Perfil(nome,idade,altura,peso,temp,cal);
         } catch (
                 FileNotFoundException e) {
             System.out.println("Arquivo nao encontrado:" + e.getMessage());
@@ -101,7 +87,7 @@ public class PerfilControle {
 
     public ArrayList<String> acessaPerfil() {
         BufferedReader conteudo = null;
-        String linha = "";
+        String linha;
         ArrayList<String> perfil = new ArrayList<>();
 
         try {
@@ -110,7 +96,7 @@ public class PerfilControle {
 
             while ((linha = conteudo.readLine()) != null) {
 
-                String dados[] = linha.split(";");
+                String[] dados = linha.split(";");
 
                 perfil.add(dados[1]);
 
@@ -140,12 +126,12 @@ public class PerfilControle {
     public boolean editarPerfil(String tipo, String novo){
 
         BufferedReader conteudo = null;
-        String linha = "";
+        String linha;
 
 
         try (FileWriter criar = new FileWriter(caminho.toFile(), true);
              BufferedWriter buffer = new BufferedWriter(criar);
-             PrintWriter escrever = new PrintWriter(buffer);) {
+             PrintWriter escrever = new PrintWriter(buffer)) {
 
             conteudo = new BufferedReader(new FileReader(caminho.toFile()));
             ArrayList<String> salvar = new ArrayList<>();
@@ -174,9 +160,9 @@ public class PerfilControle {
             FileWriter cNovo = new FileWriter(caminho.toFile());
             BufferedWriter newBuffer = new BufferedWriter(cNovo);
 
-            for (int i = 0; i < salvar.size(); i++) {
+            for (String s : salvar) {
 
-                newBuffer.write(salvar.get(i));
+                newBuffer.write(s);
                 newBuffer.newLine();
 
             }
@@ -206,7 +192,7 @@ public class PerfilControle {
     private boolean dataRepetida(String dataAtual){
 
         BufferedReader conteudo = null;
-        String linha = "";
+        String linha;
         ArrayList<String> perfil = new ArrayList<>();
 
         try {
@@ -215,16 +201,16 @@ public class PerfilControle {
 
             while ((linha = conteudo.readLine()) != null) {
 
-                String dados[] = linha.split(";");
+                String[] dados = linha.split(";");
 
                 perfil.add(dados[0]);
 
             }
 
-            for (int i = 0;i<perfil.size();i++){
+            for (String s : perfil) {
 
-                if(perfil.get(i).equals(dataAtual)){
-                    return  true;
+                if (s.equals(dataAtual)) {
+                    return true;
                 }
 
             }
@@ -250,24 +236,22 @@ public class PerfilControle {
         return false;
     }
 
-    private boolean editaPeso(String novo, String dataAtual){
+    private void editaPeso(String novo, String dataAtual){
         BufferedReader conteudo = null;
-        String linha = "";
-        String totalL ="";
-        boolean uma = true;
+        String linha;
         int qlinhas = 0;
 
 
         try (FileWriter criar = new FileWriter(caminhoPeso.toFile(), true);
              BufferedWriter buffer = new BufferedWriter(criar);
-             PrintWriter escrever = new PrintWriter(buffer);) {
+             PrintWriter escrever = new PrintWriter(buffer)) {
 
             conteudo = new BufferedReader(new FileReader(caminhoPeso.toFile()));
             conteudo.mark(1000);
             ArrayList<String> salvar = new ArrayList<>();
 
 
-            while ((totalL = conteudo.readLine()) != null) {
+            while (conteudo.readLine() != null) {
                 qlinhas++;
             }
             conteudo.reset();
@@ -303,16 +287,15 @@ public class PerfilControle {
             FileWriter cNovo = new FileWriter(caminhoPeso.toFile());
             BufferedWriter newBuffer = new BufferedWriter(cNovo);
 
-            for (int i = 0; i < salvar.size(); i++) {
+            for (String s : salvar) {
 
-                newBuffer.write(salvar.get(i));
+                newBuffer.write(s);
                 newBuffer.newLine();
 
             }
 
             newBuffer.close();
             cNovo.close();
-            return true;
         } catch (FileNotFoundException e) {
             System.out.println("Arquivo nao encontrado:" + e.getMessage());
         } catch (ArrayIndexOutOfBoundsException e) {
@@ -329,19 +312,16 @@ public class PerfilControle {
             }
         }
 
-        return false;
-
     }
 
     public void setPesoArquivo(String peso){
 
-        BufferedReader conteudo = null;
-        String escreverNoArq = "";
+        String escreverNoArq;
         Calendar d = Calendar.getInstance();
 
         try (FileWriter criar = new FileWriter(caminhoPeso.toFile(), true);
              BufferedWriter buffer = new BufferedWriter(criar);
-             PrintWriter escrever = new PrintWriter(buffer);) {
+             PrintWriter escrever = new PrintWriter(buffer)) {
 
             String dia = d.get(Calendar.DATE)+"";
             String mes = String.format("%02d", d.get(Calendar.MONTH)+1);
@@ -367,29 +347,20 @@ public class PerfilControle {
             System.out.println("IndexOutBouds: " + e.getMessage());
         } catch (IOException e) {
             System.out.println("IO Erro: " + e.getMessage());
-        } finally {
-            if (conteudo != null) {
-                try {
-                    conteudo.close();
-                } catch (IOException e) {
-                    System.out.println("IO Erro: " + e.getMessage());
-                }
-            }
         }
 
     }
 
     public void criarArq(Perfil p, PerfilControle pc){
 
-        BufferedReader conteudo = null;
-        String escreverNoArq = "";
+        String escreverNoArq;
 
 
         pc.setPesoArquivo(p.getPeso()+"");
 
         try (FileWriter criar = new FileWriter(caminho.toFile(), false);
              BufferedWriter buffer = new BufferedWriter(criar);
-             PrintWriter escrever = new PrintWriter(buffer);) {
+             PrintWriter escrever = new PrintWriter(buffer)) {
             escreverNoArq = "Nome;" + p.getNome() +"\n"+
                     "Idade;" + p.getIdade() +"\n"+
                     "Altura;"+ p.getAltura()+"\n"+
@@ -406,14 +377,6 @@ public class PerfilControle {
             System.out.println("IndexOutBouds: " + e.getMessage());
         } catch (IOException e) {
             System.out.println("IO Erro: " + e.getMessage());
-        } finally {
-            if (conteudo != null) {
-                try {
-                    conteudo.close();
-                } catch (IOException e) {
-                    System.out.println("IO Erro: " + e.getMessage());
-                }
-            }
         }
 
     }
@@ -421,7 +384,7 @@ public class PerfilControle {
     public ArrayList<String> getPesototal(){
 
         BufferedReader conteudo = null;
-        String linha = "";
+        String linha;
         ArrayList<String> pesos = new ArrayList<>();
 
         try {
@@ -430,7 +393,7 @@ public class PerfilControle {
 
             while ((linha = conteudo.readLine()) != null) {
 
-                String dados[] = linha.split(";");
+                String[] dados = linha.split(";");
 
                 pesos.add(dados[1]);
 
@@ -462,7 +425,7 @@ public class PerfilControle {
 
 
         BufferedReader conteudo = null;
-        String linha = "";
+        String linha;
         ArrayList<String> data = new ArrayList<>();
 
         try {
@@ -471,7 +434,7 @@ public class PerfilControle {
 
             while ((linha = conteudo.readLine()) != null) {
 
-                String dados[] = linha.split(";");
+                String[] dados = linha.split(";");
 
                 data.add(dados[0]);
 

@@ -1,8 +1,6 @@
 package com.lp2final.modelo;
 
 import java.io.*;
-import java.nio.file.Path;
-import java.nio.file.Paths;
 
 public class Perfil implements Serializable {
 
@@ -44,8 +42,7 @@ public class Perfil implements Serializable {
     }
 
     public double imc(){
-        double imc = this.peso/(this.altura*this.altura);
-        return imc;
+        return this.peso/(this.altura* this.altura);
     }
 
     public String imcClassificacao(){
