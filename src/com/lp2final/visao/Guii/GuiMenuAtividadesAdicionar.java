@@ -54,8 +54,8 @@ public class GuiMenuAtividadesAdicionar extends JFrame {
         //titulo
 
         //Painel onde o usario botara as informaçoes
-        JPanel panelBoteoes = new JPanel();
-        panelBoteoes.setLayout(null);
+        JPanel panelBotoes = new JPanel();
+        panelBotoes.setLayout(null);
 
         AtividadesControle atividadesControle = new AtividadesControle(arquivoPerfil);
         ArrayList<AtividadeFisica> atividades = null;
@@ -72,26 +72,23 @@ public class GuiMenuAtividadesAdicionar extends JFrame {
         JComboBox atividadesLista = new JComboBox(atividadesNomes.toArray(value -> new String[0]));
 
         //botoens
-        JButton botaoPerfil = new JButton("Selecionar Atividade");
+        JButton botaoSelecionarAtividade = new JButton("Selecionar Atividade");
         ArrayList<AtividadeFisica> finalAtividades = atividades;
-        botaoPerfil.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                String escolha = atividadesLista.getSelectedItem().toString();
-                for (AtividadeFisica atividadeFisica : finalAtividades) {
-                    if (atividadeFisica.getNome().equals(escolha)) {
-                        AtividadeFeita atividadeFeita = new AtividadeFeita(new PerfilControle(arquivoPerfil).getPerfil(), Instant.now(), atividadeFisica, "", 0.0);
-                        Modificador modificador = new Modificador(atividadeFeita);
-                        modificador.alterarAtividade();
-                        break;
-                    }
+        botaoSelecionarAtividade.addActionListener(e -> {
+            String escolha = atividadesLista.getSelectedItem().toString();
+            for (AtividadeFisica atividadeFisica : finalAtividades) {
+                if (atividadeFisica.getNome().equals(escolha)) {
+                    AtividadeFeita atividadeFeita = new AtividadeFeita(new PerfilControle(arquivoPerfil).getPerfil(), Instant.now(), atividadeFisica, "", 0.0);
+                    Modificador modificador = new Modificador(atividadeFeita, arquivoPerfil);
+                    modificador.alterarAtividade();
+                    break;
                 }
-                // AtividadeFeita(Perfil perfil, Instant data, AtividadeFisica atividadeFisica, String descricao, Double duracao)
-                //atividadeFeita = new AtividadeFeita(arquivoPerfil, Instant.now(), atividadesLista.getSelectedItem().toString(), )
             }
+            // AtividadeFeita(Perfil perfil, Instant data, AtividadeFisica atividadeFisica, String descricao, Double duracao)
+            //atividadeFeita = new AtividadeFeita(arquivoPerfil, Instant.now(), atividadesLista.getSelectedItem().toString(), )
         });
-        JButton botaoEditar = new JButton("Nova Atividade");
-        botaoEditar.addActionListener(new ActionListener() {
+        JButton botaoNovaAtividade = new JButton("Nova Atividade");
+        botaoNovaAtividade.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
 
@@ -101,12 +98,12 @@ public class GuiMenuAtividadesAdicionar extends JFrame {
         //tamanho e local dos botoes
         atividadesLista.setBounds((larg/2) - 350/2,10+70*0,350,60);
 
-        botaoPerfil.setBounds( (larg/2) - 150/2,10+70*1,150,60);
-        botaoEditar.setBounds((larg/2) - 150/2,10+70*2,150,60);
+        botaoSelecionarAtividade.setBounds( (larg/2) - 150/2,10+70*1,150,60);
+        botaoNovaAtividade.setBounds((larg/2) - 150/2,10+70*2,150,60);
 
-        panelBoteoes.add(atividadesLista);
-        panelBoteoes.add(botaoPerfil);
-        panelBoteoes.add(botaoEditar);
+        panelBotoes.add(atividadesLista);
+        panelBotoes.add(botaoSelecionarAtividade);
+        panelBotoes.add(botaoNovaAtividade);
 
         //Painel onde o usario botara as informaçoes
         JPanel panelVolta = new JPanel();
@@ -119,7 +116,7 @@ public class GuiMenuAtividadesAdicionar extends JFrame {
 
         //adiciona cade painel em seua posiçoes podem ser (NORTH, SOUTH,WEST,EAST,CENTER)
         add(panelTitulo, BorderLayout.NORTH );
-        add(panelBoteoes, BorderLayout.CENTER);
+        add(panelBotoes, BorderLayout.CENTER);
         add(panelVolta, BorderLayout.SOUTH);
 
         //adiciona cade painel em seua posiçoes podem ser (NORTH, SOUTH,WEST,EAST,CENTER)
