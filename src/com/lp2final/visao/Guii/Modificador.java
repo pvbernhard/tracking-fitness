@@ -39,7 +39,7 @@ public class Modificador extends JFrame{
     int larg = (int) (largT*0.4);
     int alt = (int) (altT*0.2);
 
-    String nomeArquivo = "";
+    String nomeArquivo;
 
     PerfilControle p;
     Perfil perfil;
@@ -498,7 +498,7 @@ public class Modificador extends JFrame{
         public void actionPerformed(ActionEvent e) {
             String nome = idadeF.getText();
             p.editarPerfil("Nome", nome);
-            perfil.setIdade( Integer.valueOf(nome).intValue());
+            perfil.setIdade(Integer.parseInt(nome));
             dispose();
         }
     }
@@ -509,7 +509,7 @@ public class Modificador extends JFrame{
         public void actionPerformed(ActionEvent e) {
             String nome = alturaF.getText();
             p.editarPerfil("Nome", nome);
-            perfil.setAltura( Double.valueOf(nome).doubleValue());
+            perfil.setAltura(Double.parseDouble(nome));
             dispose();
         }
     }
@@ -520,7 +520,7 @@ public class Modificador extends JFrame{
         public void actionPerformed(ActionEvent e) {
             String nome = pesoF.getText();
             p.editarPerfil("Nome", nome);
-            perfil.setPeso( Double.valueOf(nome).doubleValue());
+            perfil.setPeso(Double.parseDouble(nome));
             dispose();
         }
     }

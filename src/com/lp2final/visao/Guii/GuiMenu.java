@@ -82,12 +82,9 @@ public class GuiMenu extends JFrame {
             g.menu();
         });
         JButton botaoRelatorio = new JButton("Relatorio");
-        botaoRelatorio.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                Relatorio relatorio = new Relatorio(arquivoPerfil);
-                JOptionPane.showMessageDialog(null, relatorio,"Relatório", JOptionPane.PLAIN_MESSAGE);
-            }
+        botaoRelatorio.addActionListener(e -> {
+            Relatorio relatorio = new Relatorio(arquivoPerfil);
+            JOptionPane.showMessageDialog(null, relatorio,"Relatório", JOptionPane.PLAIN_MESSAGE);
         });
         JButton botaoPdf = new JButton("Gerar PDF");
         botaoPdf.addActionListener(pdfCriar);
@@ -136,8 +133,10 @@ public class GuiMenu extends JFrame {
 
         @Override
         public void actionPerformed(ActionEvent e) {
-            JOptionPane.showMessageDialog(null,"Criado por\nMario Pinto Freitas Filho" +
-                    "\nPedro Vinnícius Bernhard","Sobre",JOptionPane.PLAIN_MESSAGE);
+            JOptionPane.showMessageDialog(null, """
+                    Criado por
+                    Mario Pinto Freitas Filho
+                    Pedro Vinnícius Bernhard""","Sobre",JOptionPane.PLAIN_MESSAGE);
         }
     }
 

@@ -18,7 +18,7 @@ class RelatorioTest {
 
     @Test
     void testGetPerfil() {
-        Assertions.assertEquals("Teste", new Relatorio(perfil, new ArrayList<AtividadeFeita>()).getPerfil().getNome());
+        Assertions.assertEquals("Teste", new Relatorio(perfil, new ArrayList<>()).getPerfil().getNome());
     }
 
     @Test

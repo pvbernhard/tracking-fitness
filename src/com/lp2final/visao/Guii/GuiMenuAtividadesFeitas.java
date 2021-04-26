@@ -1,16 +1,11 @@
 package com.lp2final.visao.Guii;
 
 import com.lp2final.controle.AtividadesControle;
-import com.lp2final.controle.PerfilControle;
 import com.lp2final.modelo.AtividadeFeita;
-import com.lp2final.modelo.AtividadeFisica;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.io.IOException;
-import java.time.Instant;
 import java.util.ArrayList;
 
 public class GuiMenuAtividadesFeitas extends JFrame {
@@ -55,7 +50,7 @@ public class GuiMenuAtividadesFeitas extends JFrame {
         panelBotoes.setLayout(null);
 
         AtividadesControle atividadesControle = new AtividadesControle(arquivoPerfil);
-        ArrayList<AtividadeFeita> atividades = null;
+        ArrayList<AtividadeFeita> atividades = new ArrayList<>();
         try {
             atividades = atividadesControle.lerAtividadesFeitas();
         } catch (IOException | ClassNotFoundException e) {

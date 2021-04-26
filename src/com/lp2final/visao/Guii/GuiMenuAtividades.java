@@ -1,12 +1,7 @@
 package com.lp2final.visao.Guii;
 
-import com.lp2final.controle.PerfilControle;
-import com.lp2final.modelo.Perfil;
-
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 
 public class GuiMenuAtividades extends JFrame {
 

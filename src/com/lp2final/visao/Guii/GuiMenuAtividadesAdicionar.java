@@ -10,12 +10,9 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.ItemEvent;
-import java.awt.event.ItemListener;
 import java.io.IOException;
 import java.time.Instant;
 import java.util.ArrayList;
-import java.util.function.IntFunction;
 
 public class GuiMenuAtividadesAdicionar extends JFrame {
 
@@ -27,7 +24,6 @@ public class GuiMenuAtividadesAdicionar extends JFrame {
     int alt = (int) (altT*0.5);
 
     String arquivoPerfil;
-    AtividadeFisica atividadeFisica;
 
     public GuiMenuAtividadesAdicionar(String arquivoPerfil){
         super("Menu");
@@ -35,7 +31,7 @@ public class GuiMenuAtividadesAdicionar extends JFrame {
 
         try {
             if (new AtividadesControle(arquivoPerfil).lerAtividades().size() == 0) {
-                AtividadesBD atividadesBD = new AtividadesBD(arquivoPerfil);
+                new AtividadesBD(arquivoPerfil);
             }
 
             setSize(larg, alt);
@@ -97,12 +93,7 @@ public class GuiMenuAtividadesAdicionar extends JFrame {
             //atividadeFeita = new AtividadeFeita(arquivoPerfil, Instant.now(), atividadesLista.getSelectedItem().toString(), )
         });
         JButton botaoNovaAtividade = new JButton("Nova Atividade");
-        botaoNovaAtividade.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                new Modificador(arquivoPerfil).adicionarAtividade();
-            }
-        });
+        botaoNovaAtividade.addActionListener(e -> new Modificador(arquivoPerfil).adicionarAtividade());
 
         //tamanho e local dos botoes
         atividadesLista.setBounds((larg/2) - 350/2,10+70*0,350,60);
