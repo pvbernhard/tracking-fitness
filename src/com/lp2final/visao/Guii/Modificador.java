@@ -1,12 +1,15 @@
 package com.lp2final.visao.Guii;
 
+import com.lp2final.controle.AtividadesControle;
 import com.lp2final.controle.PerfilControle;
+import com.lp2final.modelo.AtividadeFeita;
 import com.lp2final.modelo.Perfil;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.IOException;
 
 public class Modificador extends JFrame{
 
@@ -39,12 +42,23 @@ public class Modificador extends JFrame{
     PerfilControle p;
     Perfil perfil;
 
+    AtividadeFeita atividadeFeita;
+
     public Modificador(String nomeArquivo){
         super("Alterar");
         this.nomeArquivo = nomeArquivo;
 
         p = new PerfilControle(this.nomeArquivo);
         perfil = p.getPerfil();
+
+        setSize(larg, alt);
+        setLocationRelativeTo(null);
+        setVisible(true);
+    }
+
+    public Modificador(AtividadeFeita atividadeFeita) {
+        super("Atividade");
+        this.atividadeFeita = atividadeFeita;
 
         setSize(larg, alt);
         setLocationRelativeTo(null);
@@ -327,6 +341,67 @@ public class Modificador extends JFrame{
         add(panelCadastro , BorderLayout.CENTER);
         add(panelBoteoes , BorderLayout.SOUTH);
         //adiciona cade painel em seua posiçoes podem ser (NORTH, SOUTH,WEST,EAST,CENTER)
+    }
+
+    public void alterarAtividade(){
+        setLayout(new BorderLayout());//criar um borda em torno da janela
+
+        //titulo
+        JPanel panelTitulo = new JPanel();
+        panelTitulo.setLayout(new FlowLayout());
+        JLabel titulo = new JLabel("Atividade Feita");
+
+        Font f = new Font("Verdana", Font.PLAIN,16);
+        titulo.setFont(f);
+
+        panelTitulo.add(titulo);
+        //titulo
+
+        //Painel onde o usario botara as informaçoes
+        JPanel panel = new JPanel();
+        panel.setLayout(new FlowLayout());
+
+        JLabel label1 = new JLabel("Descrição");
+        JTextField field1 = new JTextField(40);
+
+        JLabel label2 = new JLabel("Duração (minutos)");
+        JTextField field2 = new JTextField(40);
+
+        //adicona as informaçoes no painel
+        panel.add(label1);
+        panel.add(field1);
+        panel.add(label2);
+        panel.add(field2);
+
+
+        //Painel onde o usario botara as informaçoes
+
+        //Painel onde ficaria o botam de confirmaçao
+        JPanel panelBoteoes = new JPanel();
+        panelBoteoes.setLayout(new FlowLayout());
+
+        JButton botaoConfirmar = new JButton("Confirmar");//criar botao e seu nome
+        botaoConfirmar.addActionListener(e -> {
+            atividadeFeita.setDescricao(field1.getText());
+            atividadeFeita.setDuracao(Double.parseDouble(field2.getText()));
+            AtividadesControle atividadesControle = new AtividadesControle(nomeArquivo);
+            try {
+                atividadesControle.escreverAtividadeFeita(atividadeFeita);
+            } catch (IOException | ClassNotFoundException ioException) {
+                ioException.printStackTrace();
+            }
+            dispose();
+        });
+
+        panelBoteoes.add(botaoConfirmar);//adicona o botal no painel
+        //Painel onde ficaria o botam de confirmaçao
+
+        //adiciona cade painel em seua posiçoes podem ser (NORTH, SOUTH,WEST,EAST,CENTER)
+        add(panelTitulo ,BorderLayout.NORTH );
+        add(panel , BorderLayout.CENTER);
+        add(panelBoteoes , BorderLayout.SOUTH);
+        //adiciona cade painel em seua posiçoes podem ser (NORTH, SOUTH,WEST,EAST,CENTER)
+
     }
 
 

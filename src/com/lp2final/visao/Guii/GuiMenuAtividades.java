@@ -54,7 +54,8 @@ public class GuiMenuAtividades extends JFrame {
         botaoPerfil.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-
+                GuiMenuAtividadesAdicionar g = new GuiMenuAtividadesAdicionar(arquivoPerfil);
+                g.atividadesAdicionarMenu();
             }
         });
         JButton botaoEditar = new JButton("Listar atividades feitas");
