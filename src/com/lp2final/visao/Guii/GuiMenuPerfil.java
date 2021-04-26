@@ -7,6 +7,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 
 public class GuiMenuPerfil extends JFrame {
 
@@ -14,6 +15,7 @@ public class GuiMenuPerfil extends JFrame {
     AbrirEditarPerfil abrirEditarPerfil = new AbrirEditarPerfil();
     AbrirEditarMetas abrirEditarMetas = new AbrirEditarMetas();
     MostrarPerfil mostrarPerfil = new MostrarPerfil();
+    MostrarPesos mostrarPesos = new MostrarPesos();
 
     Dimension tamTela = getToolkit().getScreenSize();
     int largT = tamTela.width;
@@ -63,6 +65,7 @@ public class GuiMenuPerfil extends JFrame {
         JButton botaoDefinir = new JButton("Definir metas de (cal/temp)");
         botaoDefinir.addActionListener(abrirEditarMetas);
         JButton botaoMostrar = new JButton("Mostrar todos os pesos");
+        botaoMostrar.addActionListener(mostrarPesos);
 
         //tamanho e local dos botoes
         botaoPerfil.setBounds( (larg/2) - 150/2,10+70*0,150,60);
@@ -141,6 +144,24 @@ public class GuiMenuPerfil extends JFrame {
         }
     }
 
+    private class MostrarPesos implements ActionListener {
+
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            PerfilControle p = new PerfilControle(arquivoPerfil);
+            ArrayList<String> pesos = p.getPesototal();
+            ArrayList<String> datas = p.getDataPesoTotal();
+            String info ="";
+
+            for(int i = 0;i<pesos.size();i++){
+
+                info ="Data: " +datas.get(i) + "  Peso:"+pesos.get(i)+"\n";
+            }
+
+            JOptionPane.showMessageDialog(null,info,"Perfil",JOptionPane.PLAIN_MESSAGE);
+
+        }
+    }
 
 
 }
