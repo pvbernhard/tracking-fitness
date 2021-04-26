@@ -23,12 +23,20 @@ public class Gui extends JFrame {
 
     String arquivoPerfil;
 
+    Dimension tamTela = getToolkit().getScreenSize();
+    int largT = tamTela.width;
+    int altT = tamTela.height;
+
+    int larg = (int) (largT*0.3);
+    int alt = (int) (altT*0.4);
+
     public Gui(String arquivoPerfil){
         super("Criar Perfil");//criar nome da janela
         this.arquivoPerfil = arquivoPerfil;
         criarMenuSuperiorDeCriarPerfil();
         criarFormulario();
 
+        setSize(larg,alt);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);//definir o padrao de fechamento para de fato fecha e nao oculta
         setLocationRelativeTo(null);
         setVisible(true);//mostra janela
@@ -46,10 +54,6 @@ public class Gui extends JFrame {
         menuItem.addActionListener(a);//execulta a ação que esta em NovoAction
 
         menuSuperior.add(menuItem);//adiciona o sobre dentro do mais
-
-
-        JMenuItem menuDoidao = new JMenuItem("Doidao");
-        menuSuperior.add(menuItem);
 
         JMenuBar barra = new JMenuBar();//mostra onde ficaria o menu criado a cima
         setJMenuBar(barra);
