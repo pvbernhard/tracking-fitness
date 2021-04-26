@@ -133,10 +133,9 @@ public class GuiMenu extends JFrame {
 
         @Override
         public void actionPerformed(ActionEvent e) {
-            JOptionPane.showMessageDialog(null, """
-                    Criado por
-                    Mario Pinto Freitas Filho
-                    Pedro Vinnícius Bernhard""","Sobre",JOptionPane.PLAIN_MESSAGE);
+            JOptionPane.showMessageDialog(null, "Criado por\n" +
+                                                "Mario Pinto Freitas Filho\n" +
+                                                "Pedro Vinnícius Bernhard","Sobre",JOptionPane.PLAIN_MESSAGE);
         }
     }
 

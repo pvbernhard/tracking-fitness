@@ -24,11 +24,10 @@ public class Menu {
 
             perfil.mostraPerfil();
 
-            System.out.println("""
-                    1 - Editar Perfil
-                    2 - Definir metas (Calorias/tempo)
-                    3 - Mostras todos os Pesos
-                    0 - Sair""");
+            System.out.println("1 - Editar Perfil\n" +
+                               "2 - Definir metas (Calorias/tempo)\n" +
+                               "3 - Mostras todos os Pesos\n" +
+                               "0 - Sair");
             escSub = scan.nextInt();
             scan.nextLine();
 
@@ -43,12 +42,11 @@ public class Menu {
                     String sub;
                     int alterar;
 
-                    System.out.println("""
-                            1 - Alterar o nome
-                            2 - Alterar Idade
-                            3 - Alterar Alturar
-                            4 - Alterar Peso
-                            0 - Sair""");
+                    System.out.println("1 - Alterar o nome\n" +
+                                       "2 - Alterar Idade\n" +
+                                       "3 - Alterar Alturar\n" +
+                                       "4 - Alterar Peso\n" +
+                                       "0 - Sair");
                     alterar = scan.nextInt();
                     scan.nextLine();
                     if(alterar == 0){
@@ -91,10 +89,9 @@ public class Menu {
 
                 while(true){
                     System.out.println("**** Metas ****");
-                    System.out.println("""
-                            1 - Definir metas de por dia Calorias
-                            2 - Definir metas de tempo de exercicios por dia
-                            0 - Sair""");
+                    System.out.println("1 - Definir metas de por dia Calorias\n" +
+                                       "2 - Definir metas de tempo de exercicios por dia\n" +
+                                       "0 - Sair");
                     int d;
                     String meta;
                     d = scan.nextInt();
