@@ -363,7 +363,7 @@ public class Modificador extends JFrame{
         panel.setLayout(new FlowLayout());
 
         JLabel label1 = new JLabel("Descrição");
-        JTextField field1 = new JTextField(40);
+        JTextField field1 = new JTextField(45);
 
         JLabel label2 = new JLabel("Duração (minutos)");
         JTextField field2 = new JTextField(40);
