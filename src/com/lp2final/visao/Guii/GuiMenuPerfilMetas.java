@@ -19,9 +19,11 @@ public class GuiMenuPerfilMetas extends JFrame {
     int larg = (int) (largT*0.3);
     int alt = (int) (altT*0.5);
 
-    public GuiMenuPerfilMetas() {
-        super("Menu");
+    String nomeArquivo;
 
+    public GuiMenuPerfilMetas(String nomeArquivo) {
+        super("Menu");
+        this.nomeArquivo = nomeArquivo;
 
         setSize(larg, alt);
         setLocationRelativeTo(null);
@@ -92,7 +94,7 @@ public class GuiMenuPerfilMetas extends JFrame {
 
         @Override
         public void actionPerformed(ActionEvent e) {
-            Modificador m = new Modificador();
+            Modificador m = new Modificador(nomeArquivo);
             m.alterarCal();
 
         }
@@ -102,7 +104,7 @@ public class GuiMenuPerfilMetas extends JFrame {
 
         @Override
         public void actionPerformed(ActionEvent e) {
-            Modificador m = new Modificador();
+            Modificador m = new Modificador(nomeArquivo);
             m.alterarTemp();
 
         }

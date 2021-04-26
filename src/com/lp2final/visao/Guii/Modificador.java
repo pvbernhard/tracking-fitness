@@ -10,8 +10,7 @@ import java.awt.event.ActionListener;
 
 public class Modificador extends JFrame{
 
-    private PerfilControle p = new PerfilControle("Perfil");
-    private Perfil perfil = p.getPerfil();
+
 
     private JTextField nomeF;
     private JTextField idadeF;
@@ -39,14 +38,19 @@ public class Modificador extends JFrame{
     int larg = (int) (largT*0.4);
     int alt = (int) (altT*0.2);
 
-    public Modificador(){
-        super("Alterar");
+    String nomeArquivo;
 
+    public Modificador(String nomeArquivo){
+        super("Alterar");
+        this.nomeArquivo = nomeArquivo;
 
         setSize(larg, alt);
         setLocationRelativeTo(null);
         setVisible(true);
     }
+
+    PerfilControle p = new PerfilControle(nomeArquivo);
+    Perfil perfil = p.getPerfil();
 
 
     public void alterarNome(){

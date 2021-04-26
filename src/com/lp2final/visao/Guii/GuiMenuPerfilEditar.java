@@ -20,10 +20,11 @@ public class GuiMenuPerfilEditar extends JFrame {
     int larg = (int) (largT*0.3);
     int alt = (int) (altT*0.5);
 
-    public GuiMenuPerfilEditar(){
+    String nomeArquivo;
+
+    public GuiMenuPerfilEditar(String nomeArquivo){
         super("Editar");
-
-
+        this.nomeArquivo = nomeArquivo;
 
         setSize(larg, alt);
         setLocationRelativeTo(null);
@@ -104,7 +105,7 @@ public class GuiMenuPerfilEditar extends JFrame {
 
         @Override
         public void actionPerformed(ActionEvent e) {
-            Modificador m = new Modificador();
+            Modificador m = new Modificador(nomeArquivo);
             m.alterarNome();
 
         }
@@ -114,7 +115,7 @@ public class GuiMenuPerfilEditar extends JFrame {
 
         @Override
         public void actionPerformed(ActionEvent e) {
-            Modificador m = new Modificador();
+            Modificador m = new Modificador(nomeArquivo);
             m.alterarIdade();
         }
     }
@@ -123,7 +124,7 @@ public class GuiMenuPerfilEditar extends JFrame {
 
         @Override
         public void actionPerformed(ActionEvent e) {
-            Modificador m = new Modificador();
+            Modificador m = new Modificador(nomeArquivo);
             m.alteraAltura();
         }
     }
@@ -132,7 +133,7 @@ public class GuiMenuPerfilEditar extends JFrame {
 
         @Override
         public void actionPerformed(ActionEvent e) {
-            Modificador m = new Modificador();
+            Modificador m = new Modificador(nomeArquivo);
             m.alteraPeso();
         }
     }

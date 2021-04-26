@@ -108,7 +108,7 @@ public class GuiMenuPerfil extends JFrame {
 
         @Override
         public void actionPerformed(ActionEvent e) {
-            GuiMenuPerfilEditar g = new GuiMenuPerfilEditar();
+            GuiMenuPerfilEditar g = new GuiMenuPerfilEditar(arquivoPerfil);
             g.menuEditar();
         }
     }
@@ -117,7 +117,7 @@ public class GuiMenuPerfil extends JFrame {
 
         @Override
         public void actionPerformed(ActionEvent e) {
-            GuiMenuPerfilMetas g = new GuiMenuPerfilMetas();
+            GuiMenuPerfilMetas g = new GuiMenuPerfilMetas(arquivoPerfil);
             g.menuMetas();
         }
     }
@@ -140,5 +140,7 @@ public class GuiMenuPerfil extends JFrame {
                     "\nMeta De Calorias Diarias: "+metaCal+"\nMeta De Tempo Diario: "+metaTemp,"Perfil",JOptionPane.PLAIN_MESSAGE);
         }
     }
+
+
 
 }
