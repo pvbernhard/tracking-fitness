@@ -399,6 +399,7 @@ public class Modificador extends JFrame{
             } catch (IOException | ClassNotFoundException ioException) {
                 ioException.printStackTrace();
             }
+            JOptionPane.showMessageDialog(null,"Atividade adicionada!","Atividade", JOptionPane.PLAIN_MESSAGE);
             dispose();
         });
 
@@ -464,6 +465,7 @@ public class Modificador extends JFrame{
             } catch (IOException | ClassNotFoundException ioException) {
                 ioException.printStackTrace();
             }
+            JOptionPane.showMessageDialog(null,"Atividade adicionada e salva!","Atividade", JOptionPane.PLAIN_MESSAGE);
             dispose();
         });
 
