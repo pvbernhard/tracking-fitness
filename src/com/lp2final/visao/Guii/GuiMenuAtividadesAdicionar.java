@@ -54,7 +54,7 @@ public class GuiMenuAtividadesAdicionar extends JFrame {
         //titulo
         JPanel panelTitulo = new JPanel();
         panelTitulo.setLayout(new FlowLayout());//criar um layout flow
-        JLabel titulo = new JLabel("Perfil");
+        JLabel titulo = new JLabel("Atividades");
 
         Font f = new Font("Verdana", Font.PLAIN,16);//Criar uma fonte -> nome da fonte/o formato regular/tamanho
         titulo.setFont(f);//adiciona a fonte no titulo

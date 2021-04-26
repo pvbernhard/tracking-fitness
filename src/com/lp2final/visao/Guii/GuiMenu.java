@@ -78,7 +78,7 @@ public class GuiMenu extends JFrame {
         JButton botaoExercicios = new JButton("Atividade Física");
         botaoExercicios.addActionListener(e -> {
             GuiMenuAtividades g = new GuiMenuAtividades(arquivoPerfil);
-            g.atividadesMenu();
+            g.menu();
         });
         JButton botaoRelatorio = new JButton("Relatorio");
         JButton botaoPdf = new JButton("Gerar PDF");
