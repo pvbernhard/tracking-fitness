@@ -19,7 +19,7 @@ public class GuiMenuAtividadesFeitas extends JFrame {
     int largT = tamTela.width;
     int altT = tamTela.height;
 
-    int larg = (int) (largT*0.3);
+    int larg = (int) (largT*0.4);
     int alt = (int) (altT*0.5);
 
     String arquivoPerfil;

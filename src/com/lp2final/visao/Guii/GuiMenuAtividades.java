@@ -56,8 +56,8 @@ public class GuiMenuAtividades extends JFrame {
         botaoEditar.addActionListener(e -> new GuiMenuAtividadesFeitas(arquivoPerfil).menu());
 
         //tamanho e local dos botoes
-        botaoPerfil.setBounds( (larg/2) - 150/2,10+70*0,150,60);
-        botaoEditar.setBounds((larg/2) - 150/2,10+70*1,150,60);
+        botaoPerfil.setBounds( (larg/2) - 200/2,10+70*0,200,60);
+        botaoEditar.setBounds((larg/2) - 200/2,10+70*1,200,60);
 
         panelBoteoes.add(botaoPerfil);
         panelBoteoes.add(botaoEditar);
