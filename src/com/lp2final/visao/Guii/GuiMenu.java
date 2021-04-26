@@ -13,6 +13,7 @@ public class GuiMenu extends JFrame {
     //EVENTOS MENU
     PdfCriar pdfCriar = new PdfCriar();
     AbrirPerfil abrirPerfil = new AbrirPerfil();
+    Sobre sobre =  new Sobre();
     //EVENTOS MENU
 
     //MENU
@@ -43,12 +44,9 @@ public class GuiMenu extends JFrame {
         JMenu menuSuperior = new JMenu("Mais");//barra superior
 
         JMenuItem menuItem = new JMenuItem("Sobre");//informaçoes que iriam aparece quando aberta o menu
+        menuItem.addActionListener(sobre);
 
         menuSuperior.add(menuItem);//adiciona o sobre dentro do mais
-
-
-        JMenuItem menuDoidao = new JMenuItem("Doidao");
-        menuSuperior.add(menuItem);
 
         JMenuBar barra = new JMenuBar();//mostra onde ficaria o menu criado a cima
         setJMenuBar(barra);
@@ -123,6 +121,15 @@ public class GuiMenu extends JFrame {
             GerarPdf p = new GerarPdf();
             p.criarPdf(arquivoPerfil);
             JOptionPane.showMessageDialog(null,"PDF Criado","Confirmacao",JOptionPane.PLAIN_MESSAGE);
+        }
+    }
+
+    private class Sobre implements  ActionListener{
+
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            JOptionPane.showMessageDialog(null,"Criado por\nMario Pinto Freitas Filho" +
+                    "\nPedro Vinnícius Bernhard","Sobre",JOptionPane.PLAIN_MESSAGE);
         }
     }
 
