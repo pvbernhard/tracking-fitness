@@ -10,8 +10,6 @@ import java.awt.event.ActionListener;
 
 public class Modificador extends JFrame{
 
-
-
     private JTextField nomeF;
     private JTextField idadeF;
     private JTextField alturaF;
@@ -21,16 +19,14 @@ public class Modificador extends JFrame{
     private JTextField tempF;
 
 
-    private AlterarNomeAction alterarNomeAction = new AlterarNomeAction();
-    private AlterarIdadeAction alterarIdadeAction = new AlterarIdadeAction();
-    private AlterarAlturaAction alterarAlturaAction = new AlterarAlturaAction();
-    private AlterarPesoAction alterarPesoAction = new AlterarPesoAction();
+    private final AlterarNomeAction alterarNomeAction = new AlterarNomeAction();
+    private final AlterarIdadeAction alterarIdadeAction = new AlterarIdadeAction();
+    private final AlterarAlturaAction alterarAlturaAction = new AlterarAlturaAction();
+    private final AlterarPesoAction alterarPesoAction = new AlterarPesoAction();
 
-    private AlterarCallAction alterarCallAction = new AlterarCallAction();
-    private AlterarTempAction alterarTempAction = new AlterarTempAction();
+    private final AlterarCallAction alterarCallAction = new AlterarCallAction();
+    private final AlterarTempAction alterarTempAction = new AlterarTempAction();
 
-
-    //MENU
     Dimension tamTela = getToolkit().getScreenSize();
     int largT = tamTela.width;
     int altT = tamTela.height;
@@ -38,19 +34,22 @@ public class Modificador extends JFrame{
     int larg = (int) (largT*0.4);
     int alt = (int) (altT*0.2);
 
-    String nomeArquivo;
+    String nomeArquivo = "";
+
+    PerfilControle p;
+    Perfil perfil;
 
     public Modificador(String nomeArquivo){
         super("Alterar");
         this.nomeArquivo = nomeArquivo;
 
+        p = new PerfilControle(this.nomeArquivo);
+        perfil = p.getPerfil();
+
         setSize(larg, alt);
         setLocationRelativeTo(null);
         setVisible(true);
     }
-
-    PerfilControle p = new PerfilControle(nomeArquivo);
-    Perfil perfil = p.getPerfil();
 
 
     public void alterarNome(){
