@@ -21,8 +21,11 @@ public class Gui extends JFrame {
     Fechar fechar = new Fechar();
     //eventos
 
-    public Gui(){
+    String arquivoPerfil;
+
+    public Gui(String arquivoPerfil){
         super("Criar Perfil");//criar nome da janela
+        this.arquivoPerfil = arquivoPerfil;
         criarMenuSuperiorDeCriarPerfil();
         criarFormulario();
 
@@ -166,7 +169,7 @@ public class Gui extends JFrame {
 
                 JOptionPane.showMessageDialog(null,"Cadastro Concluido","Cadastro",JOptionPane.PLAIN_MESSAGE);
                 p.criarArq(perfil,p);
-                GuiMenu g = new GuiMenu();
+                GuiMenu g = new GuiMenu(arquivoPerfil);
                 dispose();
             }
 

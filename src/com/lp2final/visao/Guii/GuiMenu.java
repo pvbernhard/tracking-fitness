@@ -23,10 +23,14 @@ public class GuiMenu extends JFrame {
     int larg = (int) (largT*0.3);
     int alt = (int) (altT*0.5);
 
-    public GuiMenu(){
+    String arquivoPerfil;
+
+    public GuiMenu(String arquivoPerfil){
         super("Menu");
+        this.arquivoPerfil = arquivoPerfil;
+
         criarMenuSUperiorMenu();
-        criarMenu();
+        criarMenu(arquivoPerfil);
 
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setSize(larg, alt);
@@ -51,7 +55,7 @@ public class GuiMenu extends JFrame {
         barra.add(menuSuperior);
     }
 
-    public void criarMenu(){
+    public void criarMenu(String arquivoPerfil){
 
         setLayout(new BorderLayout());//criar um borda em torno da janela
 
@@ -74,12 +78,9 @@ public class GuiMenu extends JFrame {
         JButton botaoPerfil = new JButton("Perfil");
         botaoPerfil.addActionListener(abrirPerfil);
         JButton botaoExercicios = new JButton("Atividade Física");
-        botaoExercicios.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                GuiMenuAtividades g = new GuiMenuAtividades();
-                g.atividadesMenu();
-            }
+        botaoExercicios.addActionListener(e -> {
+            GuiMenuAtividades g = new GuiMenuAtividades(arquivoPerfil);
+            g.atividadesMenu();
         });
         JButton botaoRelatorio = new JButton("Relatorio");
         JButton botaoPdf = new JButton("Gerar PDF");
@@ -110,7 +111,7 @@ public class GuiMenu extends JFrame {
 
         @Override
         public void actionPerformed(ActionEvent e) {
-            GuiMenuPerfil g = new GuiMenuPerfil();
+            GuiMenuPerfil g = new GuiMenuPerfil(arquivoPerfil);
             g.perfilMenu();
         }
     }
@@ -120,7 +121,7 @@ public class GuiMenu extends JFrame {
         @Override
         public void actionPerformed(ActionEvent e) {
             GerarPdf p = new GerarPdf();
-            p.criarPdf("Perfil");
+            p.criarPdf(arquivoPerfil);
             JOptionPane.showMessageDialog(null,"PDF Criado","Confirmacao",JOptionPane.PLAIN_MESSAGE);
         }
     }

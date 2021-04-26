@@ -22,9 +22,11 @@ public class GuiMenuPerfil extends JFrame {
     int larg = (int) (largT*0.3);
     int alt = (int) (altT*0.5);
 
-    public GuiMenuPerfil(){
-        super("Menu");
+    String arquivoPerfil;
 
+    public GuiMenuPerfil(String arquivoPerfil){
+        super("Menu");
+        this.arquivoPerfil = arquivoPerfil;
 
 
         setSize(larg, alt);

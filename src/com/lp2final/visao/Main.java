@@ -23,9 +23,9 @@ public class Main {
         PerfilControle p = new PerfilControle(arquivoPerfil);
         //Gui
         if(!p.perfilExist()) {
-            Gui face = new Gui();
+            Gui face = new Gui(arquivoPerfil);
         }else{
-            GuiMenu face = new GuiMenu();
+            GuiMenu face = new GuiMenu(arquivoPerfil);
         }
 
 
