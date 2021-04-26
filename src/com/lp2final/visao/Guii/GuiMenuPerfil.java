@@ -130,9 +130,12 @@ public class GuiMenuPerfil extends JFrame {
             String altura = perfil.getAltura()+"";
             String peso = perfil.getPeso()+"";
             String imc = perfil.imcClassificacao();
+            String metaCal = perfil.getMetaCal();
+            String metaTemp = perfil.getMetaTemp();
 
             JOptionPane.showMessageDialog(null,"Nome: "+nome+"\nIdade: "+idade+"\nAltura: "+altura+"" +
-                    "\nPeso: "+peso+"\nVoce está com: "+imc,"Perfil",JOptionPane.PLAIN_MESSAGE);
+                    "\nPeso: "+peso+"\nVoce está com: "+imc +
+                    "\nMeta De Calorias Diarias: "+metaCal+"\nMeta De Tempo Diario: "+metaTemp,"Perfil",JOptionPane.PLAIN_MESSAGE);
         }
     }
 
