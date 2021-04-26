@@ -100,7 +100,7 @@ public class GuiMenuAtividadesAdicionar extends JFrame {
         botaoNovaAtividade.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-
+                new Modificador(arquivoPerfil).adicionarAtividade();
             }
         });
 
