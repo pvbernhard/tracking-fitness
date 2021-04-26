@@ -118,7 +118,7 @@ public class AtividadeFeita implements Serializable {
 
     @Override
     public String toString() {
-        return "[" + this.getDia() + "/" + this.getMes() + "/" + this.getAno() + "] " + atividadeFisica.getNome() +
+        return this.getDia() + "/" + this.getMes() + "/" + this.getAno() + " " + atividadeFisica.getNome() +
                 ", [duração: " + this.getDuracaoFormatada() +
                 ", calorias: " + this.getCaloriasFormatada() +
                 ", " + this.getDescricaoFormatada() + "]";

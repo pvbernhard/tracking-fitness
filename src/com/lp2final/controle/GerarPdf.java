@@ -6,6 +6,7 @@ import com.itextpdf.text.Paragraph;
 import com.itextpdf.text.pdf.PdfPCell;
 import com.itextpdf.text.pdf.PdfPTable;
 import com.itextpdf.text.pdf.PdfWriter;
+import com.lp2final.modelo.AtividadeFeita;
 import com.lp2final.modelo.Perfil;
 
 import java.io.FileOutputStream;
@@ -71,6 +72,17 @@ public class GerarPdf {
                 tabPeso.addCell(cPeso);
             }
             doc.add(tabPeso);
+
+            doc.add(new Paragraph("   "));
+            PdfPTable tabAtividades = new PdfPTable(1);
+            tabAtividades.addCell(new PdfPCell(new Paragraph("ATIVIDADES FEITAS")));
+            ArrayList<AtividadeFeita> atividades = new AtividadesControle(arquivoPerfil).lerAtividadesFeitas();
+
+            for (AtividadeFeita atividadeFeita : atividades) {
+                tabAtividades.addCell(new PdfPCell(new Paragraph(atividadeFeita.toString())));
+            }
+            doc.add(tabAtividades);
+
             doc.close();
 
 
