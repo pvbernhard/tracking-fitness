@@ -360,13 +360,19 @@ public class Modificador extends JFrame{
 
         //Painel onde o usario botara as informaçoes
         JPanel panel = new JPanel();
-        panel.setLayout(new FlowLayout());
+        panel.setLayout(null);
 
         JLabel label1 = new JLabel("Descrição");
-        JTextField field1 = new JTextField(45);
+        JTextField field1 = new JTextField(40);
 
         JLabel label2 = new JLabel("Duração (minutos)");
         JTextField field2 = new JTextField(40);
+
+        label1.setBounds( (larg/2) - 150,10+50*0,150,17);
+        field1.setBounds( (larg/2) - 150/2,10+50*0,300,20);
+
+        label2.setBounds( (larg/2) - 195,10+30*1,300,17);
+        field2.setBounds( (larg/2) - 150/2,10+30*1,300,20);
 
         //adicona as informaçoes no painel
         panel.add(label1);
