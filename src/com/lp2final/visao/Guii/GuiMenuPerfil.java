@@ -158,7 +158,7 @@ public class GuiMenuPerfil extends JFrame {
                 info ="Data: " +datas.get(i) + "  Peso:"+pesos.get(i)+"\n";
             }
 
-            JOptionPane.showMessageDialog(null,info,"Perfil",JOptionPane.PLAIN_MESSAGE);
+            JOptionPane.showMessageDialog(null,info,"Lista De Pesos",JOptionPane.PLAIN_MESSAGE);
 
         }
     }
